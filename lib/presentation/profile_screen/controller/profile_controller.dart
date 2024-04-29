@@ -60,7 +60,8 @@ class ProfileController extends GetxController {
 
   /// handles the success response for the API
   void _handleListUserSuccess() {
-    Get.find<PrefUtils>().setData(postListUserResp.data!.data!);
+    // TODO 解决报错，临时注释，稍后删除
+    // Get.find<PrefUtils>().setData(postListUserResp.data!.data!);
   }
 
   /// calls the [https://nodedemo.dhiwise.co/device/api/v1/user/list] API

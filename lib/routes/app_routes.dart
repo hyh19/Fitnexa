@@ -11,28 +11,28 @@ import '../presentation/home_screen/binding/home_binding.dart';
 import '../presentation/home_screen/home_screen.dart';
 import '../presentation/login_screen/binding/login_binding.dart';
 import '../presentation/login_screen/login_screen.dart';
+import '../presentation/pairing_success_screen/binding/pairing_success_binding.dart';
+import '../presentation/pairing_success_screen/pairing_success_screen.dart';
+import '../presentation/pairing_watch_screen/binding/pairing_watch_binding.dart';
+import '../presentation/pairing_watch_screen/pairing_watch_screen.dart';
 import '../presentation/phone_verification_screen/binding/phone_verification_binding.dart';
 import '../presentation/phone_verification_screen/phone_verification_screen.dart';
 import '../presentation/profile_screen/binding/profile_binding.dart';
 import '../presentation/profile_screen/profile_screen.dart';
 import '../presentation/region_screen/binding/region_binding.dart';
 import '../presentation/region_screen/region_screen.dart';
-import '../presentation/settings_screen/binding/settings_binding.dart';
-import '../presentation/settings_screen/settings_screen.dart';
-import '../presentation/splash_screen/binding/splash_binding.dart';
-import '../presentation/splash_screen/splash_screen.dart';
-import '../presentation/welcome_screen/binding/welcome_binding.dart';
-import '../presentation/welcome_screen/welcome_screen.dart';
-import '../presentation/pairing_success_screen/binding/pairing_success_binding.dart';
-import '../presentation/pairing_success_screen/pairing_success_screen.dart';
-import '../presentation/pairing_watch_screen/binding/pairing_watch_binding.dart';
-import '../presentation/pairing_watch_screen/pairing_watch_screen.dart';
 import '../presentation/scan_code_screen/binding/scan_code_binding.dart';
 import '../presentation/scan_code_screen/scan_code_screen.dart';
 import '../presentation/search_device_screen/binding/search_device_binding.dart';
 import '../presentation/search_device_screen/search_device_screen.dart';
 import '../presentation/search_result_screen/binding/search_result_binding.dart';
 import '../presentation/search_result_screen/search_result_screen.dart'; // ignore_for_file: must_be_immutable
+import '../presentation/settings_screen/binding/settings_binding.dart';
+import '../presentation/settings_screen/settings_screen.dart';
+import '../presentation/splash_screen/binding/splash_binding.dart';
+import '../presentation/splash_screen/splash_screen.dart';
+import '../presentation/welcome_screen/binding/welcome_binding.dart';
+import '../presentation/welcome_screen/welcome_screen.dart';
 
 // ignore_for_file: must_be_immutable
 class AppRoutes {
@@ -129,16 +129,6 @@ class AppRoutes {
       bindings: [SettingsBinding()],
     ),
     GetPage(
-      name: appNavigationScreen,
-      page: () => AppNavigationScreen(),
-      bindings: [AppNavigationBinding()],
-    ),
-    GetPage(
-      name: initialRoute,
-      page: () => WelcomeScreen(),
-      bindings: [WelcomeBinding()],
-    ),
-    GetPage(
       name: searchDeviceScreen,
       page: () => SearchDeviceScreen(),
       bindings: [SearchDeviceBinding()],
@@ -168,6 +158,11 @@ class AppRoutes {
       page: () => AppNavigationScreen(),
       bindings: [AppNavigationBinding()],
     ),
+    // GetPage(
+    //   name: initialRoute,
+    //   page: () => WelcomeScreen(),
+    //   bindings: [WelcomeBinding()],
+    // ),
     GetPage(
       name: initialRoute,
       page: () => SearchDeviceScreen(),

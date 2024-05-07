@@ -60,4 +60,8 @@ class ImageConstant {
   static String imgEye = '$imagePath/img_eye.svg';
 
   static String imageNotFound = 'assets/images/image_not_found.png';
+
+  static String imgProfile = '$imagePath/img_profile.svg';
+
+  static String imgRefresh = '$imagePath/img_refresh.svg';
 }

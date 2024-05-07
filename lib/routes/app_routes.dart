@@ -22,7 +22,17 @@ import '../presentation/settings_screen/settings_screen.dart';
 import '../presentation/splash_screen/binding/splash_binding.dart';
 import '../presentation/splash_screen/splash_screen.dart';
 import '../presentation/welcome_screen/binding/welcome_binding.dart';
-import '../presentation/welcome_screen/welcome_screen.dart'; // ignore_for_file: must_be_immutable
+import '../presentation/welcome_screen/welcome_screen.dart';
+import '../presentation/pairing_success_screen/binding/pairing_success_binding.dart';
+import '../presentation/pairing_success_screen/pairing_success_screen.dart';
+import '../presentation/pairing_watch_screen/binding/pairing_watch_binding.dart';
+import '../presentation/pairing_watch_screen/pairing_watch_screen.dart';
+import '../presentation/scan_code_screen/binding/scan_code_binding.dart';
+import '../presentation/scan_code_screen/scan_code_screen.dart';
+import '../presentation/search_device_screen/binding/search_device_binding.dart';
+import '../presentation/search_device_screen/search_device_screen.dart';
+import '../presentation/search_result_screen/binding/search_result_binding.dart';
+import '../presentation/search_result_screen/search_result_screen.dart'; // ignore_for_file: must_be_immutable
 
 // ignore_for_file: must_be_immutable
 class AppRoutes {
@@ -47,6 +57,16 @@ class AppRoutes {
   static const String dataScreen = '/data_screen';
 
   static const String settingsScreen = '/settings_screen';
+
+  static const String searchDeviceScreen = '/search_device_screen';
+
+  static const String searchResultScreen = '/search_result_screen';
+
+  static const String pairingWatchScreen = '/pairing_watch_screen';
+
+  static const String pairingSuccessScreen = '/pairing_success_screen';
+
+  static const String scanCodeScreen = '/scan_code_screen';
 
   static const String appNavigationScreen = '/app_navigation_screen';
 
@@ -117,6 +137,41 @@ class AppRoutes {
       name: initialRoute,
       page: () => WelcomeScreen(),
       bindings: [WelcomeBinding()],
+    ),
+    GetPage(
+      name: searchDeviceScreen,
+      page: () => SearchDeviceScreen(),
+      bindings: [SearchDeviceBinding()],
+    ),
+    GetPage(
+      name: searchResultScreen,
+      page: () => SearchResultScreen(),
+      bindings: [SearchResultBinding()],
+    ),
+    GetPage(
+      name: pairingWatchScreen,
+      page: () => PairingWatchScreen(),
+      bindings: [PairingWatchBinding()],
+    ),
+    GetPage(
+      name: pairingSuccessScreen,
+      page: () => PairingSuccessScreen(),
+      bindings: [PairingSuccessBinding()],
+    ),
+    GetPage(
+      name: scanCodeScreen,
+      page: () => ScanCodeScreen(),
+      bindings: [ScanCodeBinding()],
+    ),
+    GetPage(
+      name: appNavigationScreen,
+      page: () => AppNavigationScreen(),
+      bindings: [AppNavigationBinding()],
+    ),
+    GetPage(
+      name: initialRoute,
+      page: () => SearchDeviceScreen(),
+      bindings: [SearchDeviceBinding()],
     )
   ];
 }

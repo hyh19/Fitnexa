@@ -80,6 +80,18 @@ final Map<String, String> enUs = {
   "lbl_50": "50", "lbl_98": "98", "lbl_heart_rate": "Heart Rate",
   "lbl_ms": "ms", "msg_hrv_daily_average": "HRV Daily Average",
 
+  // Search Device Screen Screen
+  "lbl_search_device": "Search device",
+  "msg_searching_nearby": "Searching nearby...",
+
+  // Pairing Watch Screen Screen
+  "msg_pairing_with_your": "Pairing with your watch",
+  "msg_please_enter_the": "Please enter the pairing code on your watch",
+
+  // Pairing Success Screen Screen
+  "lbl_get_started": "Get Started", "lbl_success2": "Success!",
+  "msg_the_watch_has_been": "The watch has been activated",
+
   // Common String
   "lbl_alert": "Alert",
   "lbl_back": "Back",
@@ -93,6 +105,7 @@ final Map<String, String> enUs = {
   "lbl_toast": "Toast",
   "msg_create_an_account": "Create an Account",
   "msg_let_s_get_started": "Let's Get Started",
+  "lbl_scan_qr_code": "Scan QR code",
 
   // App navigation Screen
   "lbl_app_navigation": "App Navigation",
@@ -109,6 +122,11 @@ final Map<String, String> enUs = {
       "Check your app's UI from the below demo screens of your app.",
   "msg_create_account_screen": "Create Account Screen",
   "msg_phone_verification": "Phone Verification Screen",
+  "msg_pairing_success": "Pairing Success Screen",
+  "msg_pairing_watch_screen": "Pairing Watch Screen",
+  "msg_scan_code_screen": "Scan Code Screen",
+  "msg_search_device_screen": "Search Device Screen",
+  "msg_search_result_screen": "Search Result Screen",
 
 // Network Error String
   "msg_network_err": "Network Error",

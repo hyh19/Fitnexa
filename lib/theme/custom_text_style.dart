@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../core/app_export.dart';
 
 extension on TextStyle {
@@ -77,6 +78,11 @@ class CustomTextStyles {
   static get bodySmallPrimary => theme.textTheme.bodySmall!.copyWith(
         color: theme.colorScheme.primary,
         fontSize: 11.fSize,
+      );
+  static get bodyLargeMiSansVFSecondaryContainer =>
+      theme.textTheme.bodyLarge!.miSansVF.copyWith(
+        color: theme.colorScheme.secondaryContainer,
+        fontWeight: FontWeight.w300,
       );
 // Headline text style
   static get headlineLargeBlack900 => theme.textTheme.headlineLarge!.copyWith(

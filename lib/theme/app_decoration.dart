@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../core/app_export.dart';
 
 class AppDecoration {
@@ -29,6 +30,9 @@ class AppDecoration {
       );
   static BoxDecoration get fillYellow => BoxDecoration(
         color: appTheme.yellow900,
+      );
+  static BoxDecoration get fillBlueGray => BoxDecoration(
+        color: appTheme.blueGray100,
       );
 // Outline decorations
   static BoxDecoration get outlineBlueGray => BoxDecoration(

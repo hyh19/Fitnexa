@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../core/app_export.dart';
 
 extension IconButtonStyleHelper on CustomIconButton {
@@ -16,6 +17,13 @@ extension IconButtonStyleHelper on CustomIconButton {
   static BoxDecoration get fillOnPrimary => BoxDecoration(
         color: theme.colorScheme.onPrimary,
         borderRadius: BorderRadius.circular(16.h),
+      );
+  static BoxDecoration get outlineBlackTL10 => BoxDecoration(
+        borderRadius: BorderRadius.circular(10.h),
+        border: Border.all(
+          color: appTheme.black900,
+          width: 2.h,
+        ),
       );
 }
 

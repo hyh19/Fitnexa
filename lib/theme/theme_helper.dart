@@ -1,5 +1,5 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
+
 import '../core/app_export.dart';
 
 LightCodeColors get appTheme => ThemeHelper().themeColor();
@@ -183,6 +183,7 @@ class LightCodeColors {
 // BlueGrayc
   Color get blueGray1006c => Color(0X6CD9D9D9);
 // BlueGray
+  Color get blueGray100 => Color(0XFFD9D9D9);
   Color get blueGray300 => Color(0XFF94A3B8);
   Color get blueGray400 => Color(0XFF888888);
   Color get blueGray50 => Color(0XFFEFEFF1);

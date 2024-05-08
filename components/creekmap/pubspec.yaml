@@ -1,0 +1,41 @@
+name: creekmap
+description: A new Flutter project.
+version: 0.0.1
+homepage:
+
+environment:
+  sdk: '>=2.12.0 <3.0.0'
+
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  plugin_platform_interface: ^2.1.6
+
+  # 谷歌地图
+  google_maps_flutter: ^2.5.0
+
+  flutter_svg: ^2.0.9
+
+  #经纬度自动缩放计算使用
+  flutter_map: ^5.0.0
+
+  creekwidgets:
+    path: ../creekwidgets
+
+  amap_flutter_location:
+    path: ../amap_flutter_location
+
+  amap_map_fluttify:
+    path: ../amap_map_fluttify
+
+dependency_overrides:
+  intl: ^0.18.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.3
+
+

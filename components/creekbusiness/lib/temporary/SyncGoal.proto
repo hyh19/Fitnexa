@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+
+message SyncGoal {
+  uint64 user_id = 1;
+  string mac_id = 2;
+  string data_date = 3;
+  uint32 exercise_duration = 4;
+  uint32 stand_duration = 5;
+  uint32 calorie = 6;
+  uint32 step_count = 7;
+  uint32 distance = 8;
+  uint32 sport_day = 9;
+  uint32 sleep_duration = 10;
+  uint32 notify_switch = 11;
+  uint32 notify_type = 12;
+  uint64 id = 13;
+}
+
+message SyncGoalList {
+  repeated SyncGoal list = 1;
+}
+

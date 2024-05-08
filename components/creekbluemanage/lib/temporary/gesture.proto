@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+enum operate_type
+{
+  INVALID = 0;
+  INQUIRE = 1;//查询
+  SET = 2;//设置
+}
+
+message protocol_gesture_operate
+{
+  operate_type operate = 1; //1bytes 操作类型 0：无效操作 1：查询 2：设置
+  bool switch_flag =2;//1bytes 手势抬腕开关 true 开启,false 关闭
+}
+
+message protocol_gesture_inquire_reply
+{
+  operate_type operate = 1; //1bytes 操作类型 0：无效操作 1：查询 2：设置
+  bool switch_flag =2;//1bytes 手势抬腕开关 true 开启,false 关闭
+}

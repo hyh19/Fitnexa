@@ -1,0 +1,198 @@
+syntax = "proto3";
+
+enum operate_type
+{
+  INVALID = 0;
+  INQUIRE = 1;//查询
+  SET = 2;//设置
+}
+
+enum tran_direction_type
+{
+  WATCH_TRAN = 0;//手表发起
+  APP_TRAN = 1;//app发起
+}
+
+enum alexa_operate_type
+{
+  ALEXA_OPERATE_NULL = 0;
+  ALEXA_MIC_OPEN = 1;//打开mic
+  ALEXA_MIC_CLOSE = 2;//关闭mic
+  ALEXA_VOICE_OPEN = 4;// 打开喇叭
+  ALEXA_VOICE_CLOSE = 5;//关闭喇叭
+}
+
+enum alexa_status_type
+{
+  ALEXA_STATUS_NULL = 0;
+  ALEXA_STATUS_SUCCESS = 1;//正常
+  ALEXA_STATUS_SET_UP = 2;//alexa未设置
+  ALEXA_STATUS_DISCONNECT = 3;//alexa蓝牙断线
+  ALEXA_STATUS_NETWORK_ERROR = 4;//alexa无网络
+  ALEXA_STATUS_UNIDENTIFY = 5;//未能识别
+  ALEXA_STATUS_RELOGIN = 6;//重新登录
+}
+
+enum alexa_noitce_type
+{
+  ALEXA_NOTICE_NULL = 0;
+  ALEXA_NOTICE_REQUEST = 1;//状态请求
+  ALEXA_NOTICE_EXIT = 2;//退出alexa流程
+  ALEXA_NOTICE_IRQ_REQUEST = 3;
+}
+
+message protocol_alexa_tran_operate
+{
+  tran_direction_type tran_type = 1;
+  alexa_operate_type operate = 2;//alexa 传输操作
+  uint32 err_code = 3;//0 正常 非0失败
+}
+
+message protocol_alexa_status_operate
+{
+  tran_direction_type tran_type = 1;//1bytes 传输类型 0：无效操作 1：手表发起 2：app发起
+  alexa_noitce_type notice_type = 2;//通知类型
+  alexa_status_type status_type = 3;//状态类型
+}
+
+message protocol_alexa_result_operate
+{
+  operate_type operate = 1; //1bytes 操作类型 0：无效操作 1：查询 2：设置
+  bool is_question = 2;//是否问句
+  bytes content = 3;//max:1000 结果内容
+}
+
+
+///闹钟
+message alexa_alarm_item
+{
+  uint32 year = 1;//2bytes
+  uint32 month = 2;//1bytes
+  uint32 day = 3;//1bytes
+  uint32 hour = 4;//1bytes
+  uint32 minute = 5;//1bytes
+  bool switch_flag = 6;//1bytes 开关
+  repeated bool repeat = 7; //7bytes 重复 周一~周七
+};
+
+message protocol_alexa_alarm_operate
+{
+  operate_type operate = 1; //1bytes 操作类型 0：无效操作 1：查询 2：设置
+  repeated alexa_alarm_item alarm_item = 2;//max：5 闹钟列表
+}
+
+message protocol_alexa_alarm_inquire_reply
+{
+  operate_type operate = 1; //1bytes 操作类型 0：无效操作 1：查询 2：设置
+  uint32 func_table = 2;//1bytes 功能表
+  uint32 alarm_support_max = 3; //1bytes 闹钟支持最大数量
+  repeated alexa_alarm_item alarm_item = 4;//max：5 闹钟列表
+}
+
+///事件提醒
+
+message alexa_reminder_item
+{
+  uint32 year = 1;//2bytes
+  uint32 month = 2;//1bytes
+  uint32 day = 3;//1bytes
+  uint32 hour = 4;//1bytes
+  uint32 minute = 5;//1bytes
+  bytes content = 6;//max:50 内容
+};
+
+message protocol_alexa_reminder_operate
+{
+  operate_type operate = 1; //1bytes 操作类型 0：无效操作 1：查询 2：设置
+  repeated alexa_reminder_item reminder_item = 2;//max：5 提醒列表
+}
+
+message protocol_alexa_reminder_inquire_reply
+{
+  operate_type operate = 1; //1bytes 操作类型 0：无效操作 1：查询 2：设置
+  uint32 func_table = 2;//1bytes 功能表
+  uint32 reminder_support_max = 3; //1bytes 提醒支持最大数量
+  repeated alexa_reminder_item reminder_item = 4;//max：5 提醒列表
+}
+
+///定时器
+enum alexa_timer_operate
+{
+  TIMER_INSERT = 0;//添加
+  TIMER_DELETE = 1;//删除
+  TIMER_DELETE_ALL = 2;//删除所有
+}
+
+message alexa_timer_item
+{
+  uint32 index = 1;
+  uint32 timer_sec = 2;
+}
+
+message protocol_alexa_timer_operate
+{
+  operate_type operate = 1; //1bytes 操作类型 0：无效操作 1：查询 2：设置
+  alexa_timer_operate timer_operate = 2;//定时器操作
+  uint32 index = 3;//定时器编号
+  uint32 timer_sec = 4;//定时时间 单位秒
+}
+
+message protocol_alexa_timer_inquire_reply
+{
+  operate_type operate = 1; //1bytes 操作类型 0：无效操作 1：查询 2：设置
+  uint32 func_table = 2;//1bytes 功能表
+  uint32 timer_support_max = 3; //1bytes 提醒支持最大数量
+  repeated alexa_timer_item items = 4;//定时器列表
+}
+
+///天气
+
+message alexa_weather_future_item
+{
+  bytes weather_type = 1; // 天气类型
+  int32 max_temp = 2; //1bytes 最大温度
+  int32 min_temp = 3; //1bytes 最小温度
+};
+
+message alexa_weather_detail_data_item
+{
+  uint32 year = 1; //最新同步
+  uint32 month = 2; // 月份
+  uint32 day = 3;
+  uint32 hour = 4; //时
+  uint32 min = 5;  //分
+  uint32 week = 6; //1bytes 星期  0x00无效 0x01~0x07:星期一~星期日
+  bytes weather_type = 7; // 天气类型
+  int32 cur_temp = 8;  //1bytes 当前的温度
+  int32 cur_max_temp = 9; //1bytes 最大温度
+  int32 cur_min_temp = 10;  //1bytes 最小温度
+  bytes city_name = 11; //max:60 城市名称
+  repeated alexa_weather_future_item future_items = 12; //最近七天天气
+  uint32 temp_unit = 13;//温度单位，0：摄氏度，1：华氏度
+}
+
+message protocol_alexa_weather_operate
+{
+  operate_type operate = 1; //1bytes 操作类型 0：无效操作 1：查询 2：设置
+  alexa_weather_detail_data_item detail_data_item = 2;
+};
+
+message protocol_alexa_weather_inquire_reply
+{
+  operate_type operate = 1; //1bytes 操作类型 0：无效操作 1：查询 2：设置
+  uint32 func_table = 2;//1bytes 功能表
+  uint32 weather_support_max = 3; //1bytes 天气详情支持最大数量
+}
+
+///通知
+message protocol_alexa_notify_status_operate
+{
+  operate_type operate = 1; //1bytes 操作类型 0：无效操作 1：查询 2：设置
+  bool notify_status = 2;//通知状态
+}
+
+message protocol_alexa_notify_status_inquire_reply
+{
+  operate_type operate = 1; //1bytes 操作类型 0：无效操作 1：查询 2：设置
+  bool notify_status = 2;//通知状态
+}

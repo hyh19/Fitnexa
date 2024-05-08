@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+message protocol_event_report
+{
+   string event_id = 1;//event id
+   string event_sub_id = 2; //Event sub id
+   string event_time = 3; //Event generation time
+   string event_message = 4;//Message body
+}

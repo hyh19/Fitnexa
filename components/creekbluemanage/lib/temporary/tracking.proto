@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+enum operate_type
+{
+  INVALID = 0;
+  INQUIRE = 1;//查询
+  SET = 2;//设置
+}
+
+message protocol_event_tracking_operate
+{
+  operate_type operate = 1; //1bytes 操作类型 0：无效操作 1：查询 2：设置
+}
+
+message protocol_event_tracking_inquire_reply
+{
+  operate_type operate = 1; //1bytes 操作类型 0：无效操作 1：查询 2：设置
+  repeated uint32 phone_func = 2;//记录通话功能使用时长
+  repeated uint32 click_dial = 3;//记录点击拨号的开始时间点 utc时间
+  repeated uint32 click_answer = 4;//记录点击接听的开始时间点 utc时间
+}

@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+enum bind_method
+{
+  BIND_ENCRYPTED = 0;//授权码验证
+  BIND_NORMAL = 1;//直接绑定
+  BIND_REMOVE = 2;//解除绑定
+  BIND_PAIRING_CODE = 3;//配对码绑定
+}
+
+enum bind_flag
+{
+  BIND_FLAG_REQUEST = 0;//表示请求绑定
+  BIND_FLAG_FAILED = 1;//失败
+  BIND_FLAG_SUCCESS = 2;//成功
+  BIND_FLAG_BOUND = 3;//已绑定
+}
+
+enum bind_phone_type
+{
+  ANDROID = 0;//安卓
+  IOS = 1;//IOS手机
+}
+
+message protocol_bind_operate
+{
+  bind_method bind_method = 1;//绑定方式
+  bind_flag bind_flag = 2;//绑定标志位
+  bind_phone_type bind_phone = 3;//绑定手机型号
+}
+
+message protocol_bind_reply
+{
+  bind_method bind_method = 1;//绑定方式
+  bind_flag bind_flag = 2;//绑定标志位
+  bytes competent_data = 3;//授权码
+  bytes pairing_code = 4;//配对码
+}

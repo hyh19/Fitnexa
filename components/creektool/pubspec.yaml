@@ -1,0 +1,30 @@
+name: creektool
+description: A new Flutter project.
+version: 0.0.2
+homepage:
+
+environment:
+  sdk: '>=2.19.2 <3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  ##权限
+  permission_handler: ^11.0.1
+  ##本地存储
+  shared_preferences: ^2.2.2
+  flustars_flutter3: ^3.0.0
+  #压缩
+  archive: ^3.4.9
+  path_provider: ^2.1.1
+flutter:
+  # This section identifies this Flutter project as a plugin project.
+  # The androidPackage and pluginClass identifiers should not ordinarily
+  # be modified. They are used by the tooling to maintain consistency when
+  # adding or updating assets for this project.
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.1
+

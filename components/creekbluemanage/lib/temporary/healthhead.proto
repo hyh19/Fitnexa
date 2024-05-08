@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+enum sync_type
+{
+  SYNC_HEART_RATE = 0;//心率
+  SYNC_STRESS = 1;//压力
+  SYNC_SPO2 = 2;//血氧
+  SYNC_SLEEP = 3;//睡眠
+  SYNC_WORKOUT = 4;//运动数据
+  SYNC_ACTIVITY = 5;//日常活动数据
+  SYNC_SWIMMING = 6;//游泳数据
+  SYNC_HRV = 7;//hrv
+  SYNC_NOISE = 8;//噪音
+  SYNC_BODY_ENERGY = 9;//身体电量
+  SYNC_RESPIRATORY_RATE = 10;//呼吸率
+  SYNC_SKIN_TEMPERATURE = 11;//皮肤温度
+}
+enum sync_operate
+{
+  START_SYNC = 0;
+  END_SYNC = 1;
+}
+message protocol_health_sync_head
+{
+  sync_operate sync_operate = 1;   //同步操作
+  sync_type sync_type = 2;
+  uint32 data_offset = 3;   //1bytes 同步数据偏移小时
+}
+message protocol_health_sync_head_reply
+{
+  sync_operate sync_operate = 1;   //同步操作
+  sync_type sync_type = 2;
+  uint32 data_offsetr = 3;   //1bytes 同步数据结束小时
+  uint32 data_size = 4;    //有效数据大小
+  bool have_next_data = 5;  //是否有下一条数据 true:有 false 没有 同步操作为结束才有效
+}

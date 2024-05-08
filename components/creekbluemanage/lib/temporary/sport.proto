@@ -1,0 +1,380 @@
+syntax = "proto3";
+
+enum operate_type
+{
+  INVALID = 0;
+  INQUIRE = 1;//查询
+  SET = 2;//设置
+}
+
+enum sport_type
+{
+  ORUN  = 0;                        //室外跑步
+  IRUN = 1;                         //室内跑步
+  OWALK = 2;                        //户外走路
+  IWALK = 3;                        //室内走路
+  HIKING = 4;                       //徒步
+  OCYCLE = 5;                       //户外骑行
+  ICYCLE = 6;                       //室内单车
+  CRICKET = 7;                      //板球
+  FOOTBALL = 8;                     //足球
+  PSWIM = 9;                        //泳池游泳
+  OSWIM = 10;                       //开放区游泳
+  YOGA = 11;                        //瑜伽
+  PILATES = 12;                      //普拉提
+  DANCE = 13;                        //跳舞
+  ZUMBA = 14;                        //尊巴舞
+  ROWER = 15;                       //划船机
+  ELLIPTICAL = 16;                      //椭圆机
+  CTRAINING = 17;                    //核心训练
+  TSTRAINING = 18;                   //传统力量训练
+  FSTRAINING = 19;                   //功能性力量训练
+  HIIT = 20;                         //HIIT
+  COOLDOWN = 21;                     //整理放松
+  WORKOUT = 22;                      //自由训练
+  FITNESS = 23;                      //健身
+  TRAIL_RUNNING = 24;                 //越野跑
+
+  // 健身
+  TREADMILL = 25;                    //踏步机
+  AEROBICS = 26;                     //有氧健身操
+  SIT_UP = 27;                       //仰卧起坐
+  PLANK = 28;                        //平板支撑
+  JUMPING_JACK = 29;                 //开合跳
+  CHIN_UP = 30;                      //引体向上
+  PUSH_UP = 31;                      //俯卧撑
+  DEEP_SQUAT = 32;                   //深蹲
+  HIGH_KNEE_LIFT = 33;               //高抬腿
+  DUMBBELL = 34;                     //哑铃
+  BARBELL = 35;                      //杠铃
+  BOXING = 36;                       //拳击
+  KICKBOXING = 37;                   //自由搏击
+  HORIZONTAL_BAR = 38;               //单杠
+  PARALLEL_BARS = 39;                //双杠
+  WALKING_MACHINE = 40;              //漫步机
+  SUMMIT_TRAINERS = 41;              //登山机
+
+  /*球类*/
+  BOWLING = 42;                      //保龄球
+  TENNIS = 43;                       //网球
+  TABLE_TENNIS = 44;                 //乒乓球
+  GOLF = 45;                         //高尔夫球
+  BASKETBALL = 46;                   //篮球
+  BADMINTON = 47;                    //羽毛球
+  HOCKEY = 48;                       //曲棍球
+  RUGBY = 49;                        //橄榄球
+  HANDBALL = 50;                     //手球
+  SQUASH = 51;                       //壁球
+  BASEBALL = 52;                     //棒球
+  SOFTBALL = 53;                     //垒球
+  SHUTTLECOCK = 54;                  //毽球
+  SEPAKTAKRAW = 55;                  //藤球
+
+  /*休闲运动*/
+  STREET_DANCE = 56;                 //街舞
+  MOUNTAIN_CLINBING = 57;            //登山
+  ROPE_SKIPPING = 58;                //跳绳
+  CLIMB_STAIRS = 59;                 //爬楼
+  BALLET = 60;                       //芭蕾
+  SOCIAL_DANCE = 61;                 //社交舞
+  DARTS = 62;                        //飞镖
+  HORSEBACK_RIDING = 63;             //骑马
+  ROLLER_SKATING = 64;               //轮滑
+  TAI_CHI = 65;                      //太极
+  FRISBEE = 66;                      //飞盘
+  HULA_HOOP = 67;                    //呼啦圈
+
+  /*冰雪运动*/
+  SLEIGH = 68;                       //雪橇
+  SKATING = 69;                      //滑冰
+  BOBSLEIGH_AND_TOBOGGANING = 70;    //雪车
+  CURLING = 71;                      //冰壶
+  ICE_HOCKEY = 72;                   //冰球
+
+  /*水上运动*/
+  SURFING = 73;                      //冲浪
+  SAILBOAT = 74;                     //帆船
+  SAILBOARD = 75;                    //帆板
+  FOLDBOATING = 76;                  //皮艇
+  CANOEING = 77;                     //划艇
+  BOAT_RACE = 78;                    //赛艇
+  MOTORBOAT = 79;                    //摩托艇
+  WATER_POLO = 80;                   //水球
+
+  /*极限运动*/
+  SLIDING_PLATE = 81;                //滑板
+  ROCK_CLIMBING = 82;                //攀岩
+  BUNGEE_JUMPING = 83;               //蹦极
+  PARKOUR = 84;                      //跑酷
+  OTHER = 85;                      //其他
+
+  /*新增运动*/
+  SPINNING = 86;                    //动感单车
+  MARTIAL_ARTS = 87;                //武术
+  TAEKWONDO = 88;                   //跆拳道
+  KARATE = 89;                      //空手道
+  GYMNASTICS = 90;                  //体操
+  PADEL = 91;                       //笼式网球
+  PICKLEBALL = 92;                  //匹克球
+  SNOWBOARDING = 93;                //单板滑雪
+  SKIING = 94;                      //双板滑雪
+  PADDLING = 95;                    //划桨
+  BMX = 96;                         //小轮车
+  FENCING = 97;                     //击剑
+  BILLIARDS = 98;                   //台球
+  BEACH_SOCCER = 99;                //沙滩足球
+  BEACH_VOLLEYBALL = 100;           //沙滩排球
+  DODGEBALL = 101;                  //躲避球
+  JAZZ = 102;                       //爵士舞
+  LATIN = 103;                      //拉丁舞
+  SQUARE_DANCE = 104;               //广场舞
+  VOLLEYBALL = 105;                 //排球
+  KITE_FLYING = 106;                //放风筝
+  FISHING = 107;                    //钓鱼
+  ARCHERY = 108;                    //射箭
+  SHOOTING = 109;                   //射击
+  WHITE_WATER_RAFTING = 110;        //漂流
+  ALPINE_SKIING = 111;              //高山滑雪
+  CROSS_COUNTRY_SKIING = 112;       //越野滑雪
+  BIATHON = 113;                    //冬季两项
+  DRAGON_BOAT_RACING = 114;         //龙舟
+  RACING = 115;                     //赛车
+}
+
+enum interval_division_mode
+{
+  MAXIMUM_MODE = 0;   //最大心率区间模式
+  RESERVE_MODE = 1;   //储备心率区间模式
+}
+
+/*获取设备支持运动类型*/
+message protocol_exercise_func_support_reply
+{
+  uint32 func_table = 1;    //功能表
+  bool orun = 2;                        //室外跑步
+  bool irun = 3;                         //室内跑步
+  bool owalk = 4;                        //户外走路
+  bool iwalk = 5;                        //室内走路
+  bool hiking = 6;                       //徒步
+  bool ocycle = 7;                       //户外骑行
+  bool icycle = 8;                       //室内单车
+  bool cricket = 9;                      //板球
+  bool football = 10;                     //足球
+  bool pswim = 11;                        //泳池游泳
+  bool oswim = 12;                       //开放区游泳
+  bool yoga = 13;                        //瑜伽
+  bool pilates = 14;                      //普拉提
+  bool dance = 15;                        //跳舞
+  bool zumba = 16;                        //尊巴舞
+  bool rower = 17;                       //划船机
+  bool elliptical = 18;                      //椭圆机
+  bool ctraining = 19;                    //核心训练
+  bool tstraining = 20;                   //传统力量训练
+  bool fstraining = 21;                   //功能性力量训练
+  bool hiit = 22;                         //hiit
+  bool cooldown = 23;                     //整理放松
+  bool workout = 24;                      //自由训练
+  bool fitness = 25;                      //健身
+  bool trail_running = 26;                 //越野跑
+
+  // 健身
+  bool treadmill = 27;                    //踏步机
+  bool aerobics = 28;                     //有氧健身操
+  bool sit_up = 29;                       //仰卧起坐
+  bool plank = 30;                        //平板支撑
+  bool jumping_jack = 31;                 //开合跳
+  bool chin_up = 32;                      //引体向上
+  bool push_up = 33;                      //俯卧撑
+  bool deep_squat = 34;                   //深蹲
+  bool high_knee_lift = 35;               //高抬腿
+  bool dumbbell = 36;                     //哑铃
+  bool barbell = 37;                      //杠铃
+  bool boxing = 38;                       //拳击
+  bool kickboxing = 39;                   //自由搏击
+  bool horizontal_bar = 40;               //单杠
+  bool parallel_bars = 41;                //双杠
+  bool walking_machine = 42;              //漫步机
+  bool summit_trainers = 43;              //登山机
+
+  /*球类*/
+  bool bowling = 44;                      //保龄球
+  bool tennis = 45;                       //网球
+  bool table_tennis = 46;                 //乒乓球
+  bool golf = 47;                         //高尔夫球
+  bool basketball = 48;                   //篮球
+  bool badminton = 49;                    //羽毛球
+  bool hockey = 50;                       //曲棍球
+  bool rugby = 51;                        //橄榄球
+  bool handball = 52;                     //手球
+  bool squash = 53;                       //壁球
+  bool baseball = 54;                     //棒球
+  bool softball = 55;                     //垒球
+  bool shuttlecock = 56;                  //毽球
+  bool sepaktakraw = 57;                  //藤球
+
+  /*休闲运动*/
+  bool street_dance = 58;                 //街舞
+  bool mountain_clinbing = 59;            //登山
+  bool rope_skipping = 60;                //跳绳
+  bool climb_stairs = 61;                 //爬楼
+  bool ballet = 62;                       //芭蕾
+  bool social_dance = 63;                 //社交舞
+  bool darts = 64;                        //飞镖
+  bool horseback_riding = 65;             //骑马
+  bool roller_skating = 66;               //轮滑
+  bool tai_chi = 67;                      //太极
+  bool frisbee = 68;                      //飞盘
+  bool hula_hoop = 69;                    //呼啦圈
+
+  /*冰雪运动*/
+  bool sleigh = 70;                       //雪橇
+  bool skating = 71;                      //滑冰
+  bool bobsleigh_and_tobogganing = 72;    //雪车
+  bool curling = 73;                      //冰壶
+  bool ice_hockey = 74;                   //冰球
+
+  /*水上运动*/
+  bool surfing = 75;                      //冲浪
+  bool sailboat = 76;                     //帆船
+  bool sailboard = 77;                    //帆板
+  bool foldboating = 78;                  //皮艇
+  bool canoeing = 79;                     //划艇
+  bool boat_race = 80;                    //赛艇
+  bool motorboat = 81;                    //摩托艇
+  bool water_polo = 82;                   //水球
+
+  /*极限运动*/
+  bool sliding_plate = 83;                //滑板
+  bool rock_climbing = 84;                //攀岩
+  bool bungee_jumping = 85;               //蹦极
+  bool parkour = 86;                      //跑酷
+  bool other = 87;                        //其他
+
+  /*新增运动*/
+  bool spinning = 88;                    //动感单车
+  bool martial_arts = 89;                //武术
+  bool taekwondo = 90;                   //跆拳道
+  bool karate = 91;                      //空手道
+  bool gymnastics = 92;                  //体操
+  bool padel = 93;                       //笼式网球
+  bool pickleball = 94;                  //匹克球
+  bool snowboarding = 95;                //单板滑雪
+  bool skiing = 96;                      //双板滑雪
+  bool paddling = 97;                    //划桨
+  bool bmx = 98;                         //小轮车
+  bool fencing = 99;                     //击剑
+  bool billiards = 100;                  //台球
+  bool beach_soccer = 101;               //沙滩足球
+  bool beach_volleyball = 102;           //沙滩排球
+  bool dodgeball = 103;                  //躲避球
+  bool jazz = 104;                       //爵士舞
+  bool latin = 105;                      //拉丁舞
+  bool square_dance = 106;               //广场舞
+  bool volleyball = 107;                 //排球
+  bool kite_flying = 108;                //放风筝
+  bool fishing = 109;                    //钓鱼
+  bool archery = 110;                    //射箭
+  bool shooting = 111;                   //射击
+  bool white_water_rafting = 112;        //漂流
+  bool alpine_skiing = 113;              //高山滑雪
+  bool cross_country_skiing = 114;       //越野滑雪
+  bool biathon = 115;                    //冬季两项
+  bool dragon_boat_racing = 116;         //龙舟
+  bool racing = 117;                     //赛车
+}
+
+/*设备运动排列顺序 */
+message protocol_exercise_sport_mode_sort
+{
+  operate_type operate = 1; //1bytes 操作类型 0：无效操作 1：查询 2：设置
+  uint32 items_len = 2;//1bytes 运动排序个数
+  repeated sport_type sport_items = 3;//运动列表排序
+}
+
+message protocol_exercise_sport_mode_sort_inquire_reply
+{
+  operate_type operate = 1; //1bytes 操作类型 0：无效操作 1：查询 2：设置
+  uint32 min_show_num = 2; //1bytes 固件运动列表最少显示个数
+  uint32 max_show_num = 3; //1bytes 固件运动列表最大显示个数
+  uint32 all_num = 4;//1bytes 固件支持的运动总数
+  uint32 items_len = 5;//1bytes 运动排序个数
+  repeated sport_type sport_items = 6;//运动列表排序
+}
+
+/*运动中子项数据*/
+message protocol_exercise_sporting_param_sort
+{
+  operate_type operate = 1; //1bytes 操作类型 0：无效操作 1：查询 2：设置
+  uint32 sport_type = 2;//1bytes 运动类型
+  uint32 items_len = 3;//1bytes 运动中子项数据排序列表个数
+  bytes items = 4;//运动中子项数据排序列表
+}
+
+message protocol_exercise_sporting_param_sort_inquire_reply
+{
+  operate_type operate = 1; //1bytes 操作类型 0：无效操作 1：查询 2：设置
+  sport_type sport_type = 2;//1bytes 运动类型
+  uint32 items_len = 3;//1bytes 运动中子项数据排序列表个数
+  bytes items = 4;//运动中子项数据排序列表
+}
+
+/*运动自识别*/
+message protocol_exercise_intelligent_recognition
+{
+  operate_type operate = 1; //1bytes 操作类型 0：无效操作 1：查询 2：设置
+  bool walk_type_switch = 2;//1bytes 走路自动识别开关 true 开启 = 1;false 关闭
+  bool run_type_switch = 3;//1bytes 跑步自动识别开关 true 开启 = 1;false 关闭
+  bool bicycle_type_switch = 4;//1bytes 自行车自动识别开关 true 开启 = 1;false 关闭
+  bool rowing_type_switch = 5;//1bytes 划船机自动识别开关 true 开启 = 1;false 关闭
+  bool swim_type_switch = 6;//1bytes 游泳自动识别开关 true 开启 = 1;false 关闭
+  bool sport_auto_pause_switch = 7;//1bytes 运动自动暂停开关 true 开启 = 1;false 关闭
+  bool sport_auto_end_switch = 8;//1bytes 运动自动结束开关 true 开启 = 1;false 关闭
+}
+
+message protocol_exercise_intelligent_recognition_inquire_reply
+{
+  operate_type operate = 1; //1bytes 操作类型 0：无效操作 1：查询 2：设置
+  bool walk_type_switch = 2;//1bytes 走路自动识别开关 true 开启 = 1;false 关闭
+  bool run_type_switch = 3;//1bytes 跑步自动识别开关 true 开启 = 1;false 关闭
+  bool bicycle_type_switch = 4;//1bytes 自行车自动识别开关 true 开启 = 1;false 关闭
+  bool rowing_type_switch = 5;//1bytes 划船机自动识别开关 true 开启 = 1;false 关闭
+  bool swim_type_switch = 6;//1bytes 游泳自动识别开关 true 开启 = 1;false 关闭
+  bool sport_auto_pause_switch = 7;//1bytes 运动自动暂停开关 true 开启 = 1;false 关闭
+  bool sport_auto_end_switch = 8;//1bytes 运动自动结束开关 true 开启 = 1;false 关闭
+}
+
+/*心率区间*/
+message protocol_exercise_heart_rate_zone
+{
+  operate_type operate = 1; //1bytes 操作类型 0：无效操作 1：查询 2：设置
+  uint32 zone1 = 2;//1bytes 心率区间1
+  uint32 zone2 = 3;//1bytes 心率区间2
+  uint32 zone3 = 4;//1bytes 心率区间3
+  uint32 zone4 = 5;//1bytes 心率区间4
+  uint32 zone5 = 6;//1bytes 心率区间5
+  uint32 zone6 = 7;//1bytes 心率区间6
+}
+
+/*同步gps信息*/
+enum gps_operate_type
+{
+  GPS_INFO_REQUEST = 0;//请求
+  GPS_INFO_END = 1;//结束
+}
+
+message protocol_exercise_gps_info
+{
+  operate_type operate = 1; //1bytes 操作类型 0：无效操作 1：查询 2：设置
+  gps_operate_type gps_operate = 2;//gps信息请求或结束
+  uint32 func_table = 3;//1bytes 功能表
+  uint32 sport_type = 4;//1bytes 运动类型
+
+}
+message protocol_exercise_gps_info_reply
+{
+  operate_type operate = 1; //1bytes 操作类型 0：无效操作 1：查询 2：设置
+  int32 rmc_latitude = 2;//纬度 负数:S南纬  正数：N北纬 放大10000000倍
+  int32 rmc_longitude = 3;//经度 负数:W西经  正数：E东经 放大10000000倍
+  uint32 gsa_location_type = 4;//1=未定位，2=2D定位，3=3D定位
+  uint32 gsa_pdop = 5;//经度因子，放大100倍
+}

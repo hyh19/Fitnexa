@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+enum log_operate_type
+{
+  LOG_START = 0;
+  LOG_END = 1;
+}
+
+message protocol_log_tran_operate
+{
+  log_operate_type log_operate = 1;//日志传输开始
+}

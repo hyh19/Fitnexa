@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+
+enum sync_type
+{
+  SYNC_HEART_RATE = 0;//心率
+  SYNC_STRESS = 1;//压力
+  SYNC_SPO2 = 2;//血氧
+  SYNC_SLEEP = 3;//睡眠
+  SYNC_WORKOUT = 4;//运动数据
+  SYNC_ACTIVITY = 5;//日常活动数据
+  SYNC_SWIMMING = 6;//游泳数据
+  SYNC_HRV = 7;//hrv
+  SYNC_NOISE = 8;//噪音
+  SYNC_BODY_ENERGY = 9;//身体电量
+  SYNC_RESPIRATORY_RATE = 10;//呼吸率
+  SYNC_SKIN_TEMPERATURE = 11;//皮肤温度
+}
+enum operate_type
+{
+  INVALID = 0;
+  INQUIRE = 1;//查询
+  SET = 2;//设置
+}
+message protocol_health_get_data_size_item
+{
+  sync_type type = 1;
+  uint32 data_offset = 2;   //1bytes 同步数据偏移
+}
+
+message protocol_health_get_data_size_operate
+{
+  operate_type operate = 1; //1bytes 操作类型 0：无效操作 1：查询 2：设置
+  repeated protocol_health_get_data_size_item item = 2;
+}
+
+message protocol_health_get_data_size_set_reply
+{
+  operate_type operate = 1; //1bytes 操作类型 0：无效操作 1：查询 2：设置
+  uint32 total_size = 2;
+  uint32 error_code = 3;//0正常,非0失败
+}
+
+message protocol_health_get_data_size_inquire_reply
+{
+  operate_type operate = 1; //1bytes 操作类型 0：无效操作 1：查询 2：设置
+  bool hear_rate_support = 2; //支持心率数据
+  bool stress_support = 3; //支持血氧数据
+  bool spo2_support = 4; //支持压力数据
+  bool sleep_support = 5; //支持睡眠数据
+  bool exercise_support = 6; //支持多运动数据
+  bool activity_support = 7; //支持日常活动数据
+  bool swim_support = 8; //支持游泳数据
+  bool hrv_support = 9;//hrv数据
+  bool noise_support = 10; //支持噪音数据
+  bool body_energy_support = 11; //支持身体电量数据
+  bool respiratory_rate_support = 12; //支持呼吸率数据
+  bool skin_temperature_support = 13; //支持皮肤温度数据
+}

@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+enum operate_type
+{
+  INVALID = 0;
+  INQUIRE = 1;//查询
+  SET = 2;//设置
+}
+
+enum language
+{
+  LANG_INVALID = 0;//无效
+  CHINESE = 1;//中文
+  ENGLISH = 2;//英语
+  GERMAN = 3;//德语
+  SPANISH = 4;//西班牙语
+  ITALIAN = 5;//意大利语
+  JAPANESE = 6;//日语
+  RUSSIAN = 7;//俄罗斯语
+  PORTUGUESE = 8;//葡萄牙语
+  FRENCH = 9;//法语
+}
+
+message protocol_language_operate
+{
+  operate_type operate = 1; //1bytes 操作类型 0：无效操作 1：查询 2：设置
+  language cur_language = 2;     //1bytes 设置语言，0x01中文 0x02英语...
+}
+
+message protocol_language_inquire_reply
+{
+  operate_type operate = 1; //1bytes操作类型 0：无效操作 1：查询 2：设置
+  language cur_language = 2;
+  bool chinese_support = 3;   //1bytes 中文
+  bool english_support = 4;   //1bytes 英语
+  bool german_support = 5;   //1bytes 德语
+  bool spanish_support = 6;   //1bytes 西班牙语
+  bool italian_support = 7;   //1bytes 意大利语
+  bool janpanese_support = 8;   //1bytes 日语
+  bool russian_support = 9;   //1bytes 俄罗斯语
+  bool portuguese_support = 10;   //1bytes 葡萄牙语
+  bool french_support = 11;   //1bytes 法语
+}

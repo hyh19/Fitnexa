@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+
+message SyncSpo {
+  uint64 user_id = 1;
+  string mac_id = 2;
+  string data_date = 3;
+  uint32 offset_last = 4;
+  uint32 spo_max = 5;
+  uint32 spo_min = 6;
+  uint32 spo_average = 7;
+  string datas = 8;
+  uint64 id = 9;
+}
+
+message SyncSpoList {
+  repeated SyncSpo list = 1;
+}

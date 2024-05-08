@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+
+message SyncHeartRate {
+  uint64 user_id = 1;
+  string mac_id = 2;
+  string data_date = 3;
+  uint32 offset_last = 4;
+  uint32 hr_max = 5;
+  uint32 hr_min = 6;
+  uint32 hr_silent = 7;
+  uint32 hr_average = 8;
+  uint32 hr_rise_ratio = 9;
+  string hr_interval = 10;
+  string datas = 11;
+  uint64 id = 12;
+}
+
+message SyncHeartRateList {
+  repeated SyncHeartRate list = 1;
+}

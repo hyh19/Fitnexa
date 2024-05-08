@@ -1,3 +1,5 @@
+import 'package:fitnexa/presentation/search_device_screen/controller/device_manager_logic.dart';
+
 import '../../../core/app_export.dart';
 import '../controller/search_device_controller.dart';
 
@@ -9,5 +11,6 @@ class SearchDeviceBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut(() => SearchDeviceController());
+    Get.lazyPut(() => DeviceManagerLogic());
   }
 }

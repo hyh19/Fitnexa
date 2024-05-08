@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+enum music_status
+{
+  MUSIC_STATUS_INVALID = 0;//无效
+  MUSIC_STATUS_PLAY = 1;//播放
+  MUSIC_STATUS_PAUSE = 2;//暂停
+}
+
+message protocol_music_control_operate
+{
+  bool switch_flag = 1; //1bytes 音乐控制开关 true 开启,false 关闭
+  music_status status = 2;         //1bytes 状态
+  uint32 cur_time = 3;    //2bytes 当前的播放时间 单位秒
+  uint32 total_time = 4; //2bytes 总时间 单位秒
+  uint32 volume = 5; //1bytes 音量
+  bytes music_name = 6;     //max:64 歌曲名
+  bytes singer_name = 7;   //max:64 歌手名
+}

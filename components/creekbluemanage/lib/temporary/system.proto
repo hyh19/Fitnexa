@@ -1,0 +1,7 @@
+syntax = "proto3";
+
+message protocol_system_operate
+{
+  bool restart = 1;//重启操作
+  bool power_off = 2;//关机操作
+}

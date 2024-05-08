@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+enum wtm_operate_type
+{
+  WTM_START = 0;
+  WTM_END = 1;
+}
+
+message protocol_wtm_download_operate
+{
+  wtm_operate_type operate = 1;//知存指令开始
+}

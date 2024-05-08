@@ -64,5 +64,9 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>we need use bluetooth config smart device</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>we need use bluetooth config smart device</string>
 </dict>
 </plist>

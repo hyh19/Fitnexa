@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+
+message SyncPressure {
+  uint64 user_id = 1;
+  string mac_id = 2;
+  string data_date = 3;
+  uint32 offset_last = 4;
+  uint32 pressure_max = 5;
+  uint32 pressure_min = 6;
+  uint32 pressure_average = 7;
+  uint32 ratio_low = 8;
+  uint32 ratio_usual = 9;
+  uint32 ratio_high = 10;
+  uint32 ratio_very_high = 11;
+  string datas = 12;
+  uint64 id = 13;
+}
+
+message SyncPressureList {
+  repeated SyncPressure list = 1;
+}

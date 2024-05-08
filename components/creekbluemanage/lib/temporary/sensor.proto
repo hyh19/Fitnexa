@@ -1,0 +1,54 @@
+syntax = "proto3";
+enum operate_type
+{
+  INVALID = 0;
+  INQUIRE = 1;//查询
+  SET = 2;//设置
+}
+enum sensor_operate_type
+{
+  SENSOR_TRAN_START= 0;
+  SENSOR_TRAN_END= 1;
+  OFF_LINE_TRAN_START= 2;
+  OFF_LINE_TRAN_END= 3;
+  SENSOR_AUTO_TRAN = 4;
+}
+
+message protocol_sensor_rawdata_tran_operate
+{
+  operate_type operate = 1; //1bytes 操作类型 0：无效操作 1：查询 2：设置
+  sensor_operate_type sensor_operate = 2;//传输开始或结束
+  bool ppg_g_data = 3;//选择ppg_g数据传输
+  bool ppg_r_data = 4;
+  bool ppg_ir_data = 5;
+  bool acc_data = 6;
+  bool gyro_data = 7;
+  bool geomagnetic_data = 8;//地磁
+  bool gnss_data = 9;
+  bool audio_data = 10;
+  bool infrared_data = 11;
+  bool sar_data = 12;
+  uint32 auto_stop_utc_time = 13;//自动传输停止时间
+  bool hrv_data = 14;//hrv数据
+  bool three_lights_100hz_data = 15;//3灯100hz
+}
+
+message protocol_sensor_rawdata_tran_inquire_reply
+{
+  operate_type operate = 1; //1bytes 操作类型 0：无效操作 1：查询 2：设置
+  uint32 hr_version = 2;//心率版本号
+  uint32 spo2_version = 3;//血氧版本号
+  uint32 stress_version = 4;//压力
+  uint32 hrv_version = 5;//hrv
+  uint32 pedo_version = 6;//计步
+  uint32 calorie_version = 7;//卡路里
+  uint32 distance_version = 8;//距离
+  uint32 activity_level_version = 9;//活动等级
+  uint32 gesture_version = 10;//手势
+  uint32 wear_version = 11;//佩戴
+  uint32 noise_version = 12;//噪音
+  uint32 exercise_duration_version = 13;//锻炼时长
+  uint32 sleep_version = 14;//睡眠
+  uint32 gnss_version = 15;//gps
+  uint32 motion_recognition_version = 16;//运动识别
+}

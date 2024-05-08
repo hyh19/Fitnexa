@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+
+message SyncActivity {
+  uint64 user_id = 1;
+  string mac_id = 2;
+  string data_date = 3;
+  uint32 total_step_count = 4;
+  uint32 total_exercise_duration = 5;
+  uint32 total_activity_calorie = 6;
+  uint32 total_rest_calorie = 7;
+  uint32 total_distance = 8;
+  uint32 total_stand_duration = 9;
+  uint32 activity_item_count = 10;
+  string datas = 11;
+  uint64 id = 12;
+  uint32 is_support_altitude_floors = 13;
+  uint32 altitude_floors = 14;
+}
+
+message SyncActivityList {
+  repeated SyncActivity list = 1;
+}

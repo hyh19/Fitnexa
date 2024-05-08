@@ -1,0 +1,111 @@
+name: creek_blue_manage_example
+description: Demonstrates how to use the creek_blue_manage plugin.
+
+# The following line prevents the package from being accidentally published to
+# pub.dev using `flutter pub publish`. This is preferred for private packages.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+version: 1.0.17+22
+environment:
+  sdk: '>=2.18.2 <3.0.0'
+
+# Dependencies specify other packages that your package needs in order to work.
+# To automatically upgrade your package dependencies to the latest versions
+# consider running `flutter pub upgrade --major-versions`. Alternatively,
+# dependencies can be manually updated by changing the version numbers below to
+# the latest version available on pub.dev. To see which dependencies have newer
+# versions available, run `flutter pub outdated`.
+dependencies:
+  flutter:
+    sdk: flutter
+  file_picker: ^5.2.4
+  #消息弹窗
+  fluttertoast: ^8.0.9
+  ##状态管理
+  get: ^4.6.5
+  flutter_smart_dialog: ^4.8.2
+  share_plus: ^7.0.2
+  extended_image: ^8.1.1
+  image_editor: ^1.3.0
+  wechat_assets_picker: ^9.0.0-dev.2
+  #图片压缩
+  flutter_image_compress: ^2.1.0
+
+
+  dartx: ^1.2.0
+  creek_blue_manage:
+    path: ../
+  creekbase:
+    path: ../../creekbase
+#    git:
+#      url: git@192.168.40.220:app-teams/creekbase.git
+#      ref: develop
+  creektool:
+    path: ../../creektool
+#    git:
+#      url: git@192.168.40.220:app-teams/creektool.git
+#      ref: develop
+  creekwidgets:
+    path: ../../creekwidgets
+#    git:
+#      url: git@192.168.40.220:app-teams/creekwidgets.git
+#      ref: develop
+  creekdial:
+    path: ../../creekdial
+#    git:
+#      url: git@192.168.40.220:app-teams/creekdial.git
+#      ref: develop
+  creek_alexa_plugin:
+    path: ../../creek_alexa_plugin
+#    git:
+#      url: git@192.168.40.220:app-teams/creek_alexa_plugin.git
+#      ref: develop
+  creekhealth:
+    path: ../../creekhealth
+#    git:
+#      url: git@192.168.40.220:app-teams/creekhealth.git
+#      ref: develop
+
+  # The following adds the Cupertino Icons font to your application.
+  # Use with the CupertinoIcons class for iOS style icons.
+  cupertino_icons: ^1.0.2
+dependency_overrides:
+  intl: ^0.18.1
+  collection: ^1.17.2
+  logger: ^1.4.0
+  uuid: ^3.0.6
+  creek_blue_manage:
+    path: ../
+  creekbase:
+    path: ../../creekbase
+  creekhealth:
+    path: ../../creekhealth
+  creek_alexa_plugin:
+    path: ../../creek_alexa_plugin
+  creekdial:
+    path: ../../creekdial
+  creekwidgets:
+    path: ../../creekwidgets
+  creektool:
+    path: ../../creektool
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  # The "flutter_lints" package below contains a set of recommended lints to
+  # encourage good coding practices. The lint set provided by the package is
+  # activated in the `analysis_options.yaml` file located at the root of your
+  # package. See that file for information about deactivating specific lint
+  # rules and activating additional ones.
+  flutter_lints: ^2.0.0
+
+# For information on the generic Dart part of this file, see the
+# following page: https://dart.dev/tools/pub/pubspec
+
+# The following section is specific to Flutter packages.
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/
+    - assets/images/
+    - assets/zip/
+    - assets/images/svg/

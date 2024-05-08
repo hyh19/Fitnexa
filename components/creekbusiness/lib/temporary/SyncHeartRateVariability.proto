@@ -1,0 +1,22 @@
+syntax = "proto3";
+option java_package = "com.creek.health.data.infrastructure.proto";
+option java_outer_classname = "SyncHeartRateVariabilityProto";
+
+message SyncHeartRateVariability {
+  uint64 user_id = 1;
+  string mac_id = 2;
+  string data_date = 3;
+  uint32 offset_last = 4;
+  uint32 hrv_max = 5;
+  uint32 hrv_min = 6;
+  uint32 hrv_average = 7;
+  uint32 sleep_max = 8;
+  uint32 sleep_min = 9;
+  string datas = 10;
+  uint64 id = 11;
+
+}
+
+message SyncHeartRateVariabilityList {
+  repeated SyncHeartRateVariability list = 1;
+}

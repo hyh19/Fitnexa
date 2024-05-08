@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+message function_table{
+  bool is_support = 1;
+  uint32 cmd_id = 2; //2bytes
+}
+
+message protocol_function_table
+{
+  function_table disturb = 1;//勿扰
+  function_table water_remind = 2;//喝水提醒
+  function_table standing_remind = 3;//站立提醒
+  function_table female_health = 4;//女性健康
+  function_table weather = 5;//天气
+  function_table message_data = 6;//消息提醒
+  function_table bt_call = 7;//是否bt协议通话
+  function_table ble_call = 8;//是否ble协议通话
+  function_table schedule_remind = 9;//日程提醒
+  function_table voice_assistant = 10;//语音助手
+  function_table quick_card = 11;//快捷卡片
+  function_table world_time = 12;//世界时钟
+  function_table frequent_contacts = 13;//常用联系人
+  function_table gps = 14;//gps功能
+  function_table online_gnss = 15;//在线星历
+  function_table offline_gnss = 16;//离线星历
+  function_table emergency_contacts = 17;//紧急联系人(SOS)
+  function_table hrv = 18;//hrv
+  function_table button_crown = 19;//按键快捷操作
+  function_table focus_mode = 20;//专注模式
+  function_table find_watch = 21;//寻找手表
+  function_table alexa = 22;//alexa
+  function_table app_list = 23;//应用列表
+  function_table event_tracking = 24;//数据埋点
+}

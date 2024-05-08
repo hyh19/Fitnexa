@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+
 import '../../core/app_export.dart';
 import '../../data/models/listUser/post_list_user_req.dart';
 import '../../data/models/listUser/post_list_user_resp.dart';
@@ -36,7 +37,7 @@ class SearchDeviceScreen extends GetWidget<SearchDeviceController> {
                 style: CustomTextStyles.bodyLargeMiSansVFSecondaryContainer,
               ),
               SizedBox(height: 28.v),
-              _buildGeneral(),
+              Expanded(child: _buildListView()),
               SizedBox(height: 5.v)
             ],
           ),
@@ -162,6 +163,36 @@ class SearchDeviceScreen extends GetWidget<SearchDeviceController> {
           )
         ],
       ),
+    );
+  }
+
+  Widget _buildListView() {
+    return GetBuilder<SearchDeviceController>(
+      builder: (controller) {
+        return ListView.builder(
+          itemCount: controller.dataList.length,
+          itemBuilder: (context, index) {
+            return GestureDetector(
+              child: ListTile(
+                title: Text(controller.dataList[index].device?.name ?? ''),
+                subtitle: Text(
+                    controller.dataList[index].device?.id.toString() ?? ''),
+              ),
+              onTap: () {
+                if (controller.connectLoading) {
+                  print("当前正在连接,不继续");
+                  return;
+                }
+                // if (!BluListenUtils.instance.requestBlueOpenORCloseState()) {
+                //   BluListenUtils.instance.showBlueOpenORCloseState(context);
+                //   return;
+                // }
+                controller.connect(controller.dataList[index]);
+              },
+            );
+          },
+        );
+      },
     );
   }
 

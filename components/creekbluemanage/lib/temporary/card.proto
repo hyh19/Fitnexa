@@ -1,0 +1,64 @@
+syntax = "proto3";
+
+enum operate_type
+{
+  INVALID = 0;
+  INQUIRE = 1;//查询
+  SET = 2;//设置
+}
+
+enum quick_card_type
+{
+  CARD_TYPE_EXERCISE  = 0;
+  CARD_TYPE_WEATHER   = 1;
+  CARD_TYPE_SUGGEST   = 2;
+  CARD_TYPE_DIAL      = 3;
+  CARD_TYPE_ACTIVITY  = 4;
+  CARD_TYPE_HEARTRATE = 5;
+  CARD_TYPE_SLEEP     = 6;
+  CARD_TYPE_STEPS     = 7;//计步
+  CARD_TYPE_SPO2      = 8;
+  CARD_TYPE_MENSTRUATION = 9;//女性生理周期
+  CARD_TYPE_MEASUREMENT  = 10;//一键测量（血氧、心率、压力）
+  CARD_TYPE_RECENT_WORKOUT = 11;//最近一次户外运动的轨迹和活动
+  CARD_TYPE_HRV       = 12;
+  CARD_TYPE_UV        = 13;//紫外线
+  CARD_TYPE_ASTRONOMY = 14;//月出月落、日出日落
+  CARD_TYPE_WORLD_CLOCK = 15;//世界时钟
+}
+
+message quick_card_func{
+  bool is_support = 1;//是否支持
+  bool is_delete = 2; //是否支持删除
+}
+
+message protocol_quick_card_operate
+{
+  operate_type operate = 1; //1bytes 操作类型 0：无效操作 1：查询 2：设置
+  repeated quick_card_type card_type = 2;
+}
+
+message protocol_quick_card_inquire_reply
+{
+  operate_type operate = 1; //1bytes 操作类型 0：无效操作 1：查询 2：设置
+  uint32 quick_card_support_max = 2; //1bytes 快捷卡片支持显示最大数量
+  uint32 quick_card_support_min = 3; //1bytes 快捷卡片支持显示最小数量
+  uint32 func_table = 4;
+  repeated quick_card_type card_type  = 5;
+  quick_card_func card_type_exercise_support      = 6;
+  quick_card_func card_type_weather_support       = 7;//支持类型
+  quick_card_func card_type_suggest_support       = 8;
+  quick_card_func card_type_dial_support          = 9;
+  quick_card_func card_type_activity_support      = 10;
+  quick_card_func card_type_heartrate_support     = 11;
+  quick_card_func card_type_sleep_support         = 12;
+  quick_card_func card_type_steps_support         = 13;
+  quick_card_func card_type_spo2_support          = 14;
+  quick_card_func card_type_menstruation_support  = 15;
+  quick_card_func card_type_measurement_support   = 16;
+  quick_card_func card_type_recent_workout_support = 17;
+  quick_card_func card_type_hrv_support           = 18;
+  quick_card_func card_type_uv_support            = 19;
+  quick_card_func card_type_astronomy_support     = 20;
+  quick_card_func card_type_world_clock_support   = 21;
+}

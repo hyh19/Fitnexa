@@ -1,0 +1,69 @@
+syntax = "proto3";
+option java_package = "com.creek.health.data.infrastructure.proto";
+option java_outer_classname = "SyncSportProto";
+
+message SyncSport {
+  uint64 user_id = 1;
+  string mac_id = 2;
+  string start_time = 3;
+  string end_time = 4;
+  uint32 is_connect_app = 5;
+  uint32 sport_type = 6;
+  uint32 sport_initiator = 7;
+  uint32 sport_duration = 8;
+  uint32 sport_goal_type = 9;
+  uint32 sport_goal_value = 10;
+  uint32 hr_average = 11;
+  uint32 hr_max = 12;
+  uint32 hr_min = 13;
+  uint32 warm_up_duration = 14;
+  uint32 fat_burning_duration = 15;
+  uint32 aerobic_exercise_duration = 16;
+  uint32 anaerobic_exercise_duration = 17;
+  uint32 extreme_exercise_duration = 18;
+  uint32 total_step = 19;
+  uint32 total_calories = 20;
+  uint32 total_distance = 21;
+  uint32 swim_distance = 22;
+  uint32 km_pace_average = 23;
+  uint32 km_pace_fast = 24;
+  uint32 speed_average = 25;
+  uint32 speed_fast = 26;
+  uint32 step_frequency_average = 27;
+  uint32 step_frequency_max = 28;
+  uint32 step_stride_average = 29;
+  uint32 step_stride_max = 30;
+  uint32 altitude_max = 31;
+  uint32 altitude_min = 32;
+  uint32 altitude_average = 33;
+  uint32 altitude_rise = 34;
+  uint32 train_score = 35;
+  uint32 vo2_max = 36;
+  uint32 vo2_grade = 37;
+  uint32 recovery_duration = 38;
+  uint32 mets = 39;
+  uint32 hr_count = 40;
+  uint32 km_speed_count = 41;
+  uint32 km_pace_count = 42;
+  uint32 step_frequency_count = 43;
+  uint32 step_stride_count = 44;
+  uint32 sport_track_count = 45;
+  string hr_datas = 46;
+  string km_speed_datas = 47;
+  string km_pace_datas = 48;
+  string step_frequency_datas = 49;
+  string step_stride_datas = 50;
+  string sport_track_datas = 51;
+  string mi_speed_datas = 52;
+  string mi_pace_datas = 53;
+  string altitude_datas = 54;
+  uint64 id = 55;
+  uint32 power = 56;
+  uint32 is_support_power = 57;
+  uint32 is_support_mets = 58;
+  uint32 is_support_altitude = 59;
+}
+
+message SyncSportList {
+  repeated SyncSport list = 1;
+}

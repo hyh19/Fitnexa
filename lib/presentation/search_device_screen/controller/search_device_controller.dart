@@ -1,10 +1,14 @@
-import 'package:flutter/material.dart';
+import 'package:creek_blue_manage/creek_blue.dart';
+import 'package:creekbase/creek_base.dart';
+import 'package:creekbase/generated/l10n.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+
 import '../../../core/app_export.dart';
 import '../../../data/apiClient/api_client.dart';
 import '../../../data/models/listUser/post_list_user_req.dart';
 import '../../../data/models/listUser/post_list_user_resp.dart';
 import '../models/search_device_model.dart';
+import 'device_manager_logic.dart';
 
 /// A controller class for the SearchDeviceScreen.
 ///
@@ -14,6 +18,19 @@ class SearchDeviceController extends GetxController {
   Rx<SearchDeviceModel> searchDeviceModelObj = SearchDeviceModel().obs;
 
   PostListUserResp postListUserResp = PostListUserResp();
+
+  late List<BlueDeviceInfo> dataList;
+  late List<BlueDeviceInfo> dataBindList;
+  bool isShowRetry = false;
+  String searchTitle = "";
+  BlueDeviceInfo? currentBluetoothDevice;
+  BlueDeviceInfo? connectBluetoothDevice;
+  bool connectLoading = false;
+  bool showPairingWatch = false;
+  Function(bool)? connectStateListen;
+  CreekCommandProtocol? foundationCommands;
+  Map<String, dynamic> map = <String, dynamic>{};
+  List<dynamic> listDialItem = [];
 
   /// Calls the https://nodedemo.dhiwise.co/device/api/v1/user/list API with the specified request data.
   ///
@@ -66,6 +83,18 @@ class SearchDeviceController extends GetxController {
     } catch (e) {}
   }
 
+  @override
+  void onInit() {
+    super.onInit();
+    dataList = [];
+    dataBindList = [];
+    // BaseInfoModel.instance.previousRoute =
+    //     Get.parameters["backPreviousRoute"] ?? Routes.cwMainHomePage;
+    // CreekLog.info(
+    //     "${Get.parameters["backPreviousRoute"]}--instance.previousRoute=${BaseInfoModel.instance.previousRoute}");
+    startScan();
+  }
+
   /// Displays a toast message using the Fluttertoast library.
   void _onListUserSuccess() {
     Fluttertoast.showToast(msg: postListUserResp.message.toString() ?? '');
@@ -75,5 +104,152 @@ class SearchDeviceController extends GetxController {
   /// The message is obtained from the `PostListUserResp` object.
   void _onListUserError() {
     Get.rawSnackbar(message: postListUserResp.message.toString() ?? '');
+  }
+
+  void startScan() async {
+    CreekLog.info("SearchWatchDeviceLogic__startScan_setIsAuto(false)");
+    CreekDeviceManger.instance.setIsAuto(false);
+    isShowRetry = false;
+    connectBluetoothDevice = null;
+    dataList.clear();
+    searchTitle = "";
+    List<BlueDeviceInfo> bindDevices = await CreekDeviceManger.instance.devices;
+    print("bindDevices==${bindDevices.toString()}");
+    update();
+    DeviceModel? deviceModel = await Get.find<DeviceManagerLogic>().getInfo();
+    CreekDeviceManger.instance.startScan(
+        (e) async {
+          if (e != null && e.isNotEmpty) {
+            //  dataBindList.clear();
+            listDialItem.clear();
+            e.sort((a, b) => (b.rssi ?? 0).compareTo(a.rssi ?? 0));
+            List<BlueDeviceInfo> list = List.from(e);
+            for (var element in list) {
+              if (CreekDeviceManger.instance
+                  .queryBlueDeviceState(element.device!)) {
+                element.connectionStatus = true;
+                element.blueName = await getBlueName(element.device!.id.id);
+              }
+              if (bindDevices.isNotEmpty) {
+                if (deviceModel != null &&
+                    (deviceModel.blueDeviceInfo?.device?.id.id ?? "-1") ==
+                        (element.device?.id.id ?? "-2")) {
+                  currentBluetoothDevice = element;
+                }
+              }
+              // for (var model in bindDevices) {
+              //   if ((element.device?.id.id??"-1") ==(model.device?. id.id??"-2")) {
+              //     dataBindList.add(element);
+              //   }
+              // }
+            }
+            dataList = List.from(list);
+            // if(dataBindList.isNotEmpty){
+            //   for (var element in dataBindList) {
+            //     dataList.remove(element);
+            //   }
+            // }
+            if (currentBluetoothDevice != null) {
+              dataList?.remove(currentBluetoothDevice);
+            }
+            if (connectBluetoothDevice != null) {
+              dataList.remove(connectBluetoothDevice);
+            }
+          }
+          update();
+        },
+        timeOut: 15,
+        endScan: () async {
+          if (dataList != null && dataList.isNotEmpty) {
+            listDialItem.clear();
+            //  dataBindList.clear();
+            dataList.sort((a, b) => (b.rssi ?? 0).compareTo(a.rssi ?? 0));
+            List<BlueDeviceInfo> list = List.from(dataList);
+            for (var element in list) {
+              if (CreekDeviceManger.instance
+                  .queryBlueDeviceState(element.device!)) {
+                element.connectionStatus = true;
+                element.blueName = await getBlueName(element.device!.id.id);
+              }
+              if (bindDevices.isNotEmpty) {
+                if (deviceModel != null &&
+                    (deviceModel.blueDeviceInfo?.device?.id.id ?? "-1") ==
+                        (element.device?.id.id ?? "-2")) {
+                  currentBluetoothDevice = element;
+                }
+              }
+              // for (var model in bindDevices) {
+              //   if ((element.device?.id.id??"-1") ==(model.device?. id.id??"-2")) {
+              //     dataBindList.add(element);
+              //   }
+              // }
+            }
+            dataList = List.from(list);
+            // if(dataBindList.isNotEmpty){
+            //   for (var element in dataBindList) {
+            //     dataList.remove(element);
+            //   }
+            // }
+            if (currentBluetoothDevice != null) {
+              dataList?.remove(currentBluetoothDevice);
+            }
+            if (connectBluetoothDevice != null) {
+              dataList.remove(connectBluetoothDevice);
+            }
+          }
+          CreekLog.info("设备扫描结束");
+          searchTitle = S.current.Search_finished;
+          isShowRetry = true;
+          update();
+        });
+  }
+
+  getBlueName(String address) async {
+    String? name = await CreekDeviceManger.instance.getDeviceName(address);
+    return name;
+  }
+
+  Future<void> connect(BlueDeviceInfo blueDeviceInfo) async {
+    // stopScan();
+    connectBluetoothDevice = blueDeviceInfo;
+    connectLoading = true;
+    dataList.remove(blueDeviceInfo);
+    update();
+    connectStateListen ??= (e) async {
+      connectLoading = false;
+      removeMyListener();
+      CreekLog.info('SearchWatchDeviceLogic_connectStateListen-返回状态-$e');
+      if (e) {
+        DeviceModel? deviceModel = await interfaceProtocol.getDeviceInfo(
+            address: blueDeviceInfo.device?.id.id);
+        CreekLog.info(
+            "SearchWatchDeviceLogic_deviceModel___${deviceModel == null ? "" : deviceModel?.toString()}");
+        if (deviceModel?.isRecoveryMode ?? false) {
+          CreekLog.info("SearchWatchDeviceLogic_处于恢复模式，直接跳到ota界面升级");
+          // Get.offNamed(Routes.watchUpdatePage,
+          //     arguments: 1,
+          //     parameters: {"address": blueDeviceInfo.device?.id.id ?? ""});
+        } else {
+          // Get.toNamed(Routes.paringWatchPage,
+          //     arguments: blueDeviceInfo,
+          //     parameters: {'state': '7', "page": "0"});
+        }
+      } else {
+        // Get.toNamed(Routes.paringWatchPage,
+        //     arguments: blueDeviceInfo, parameters: {'state': '4', "page": "0"});
+      }
+      update();
+    };
+    CreekLog.info("SearchWatchDeviceLogic_开始连接设备connectionDevice");
+    CreekDeviceManger.instance.connectionDevice(
+      blueDeviceInfo.device!,
+      connectStateListen: connectStateListen,
+    );
+  }
+
+  void removeMyListener() {
+    CreekLog.info('---removeConnectStateListen------');
+    connectStateListen = null;
+    CreekDeviceManger.instance.removeConnectStateListen();
   }
 }

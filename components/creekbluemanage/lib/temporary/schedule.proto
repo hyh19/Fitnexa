@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+enum operate_II_type
+{
+  INSERT = 0; //增加
+  DELETE = 1;//删除
+  UPDATE = 2;//改
+  READ = 3;//查
+}
+
+enum notify_type
+{
+  ALLOW = 0;//允许通知
+  SILENT = 1;//静默通知
+  CLOSE = 2;//关闭通知
+}
+enum disp_status
+{
+  DISP_OFF = 0;
+  DISP_ON = 1;
+}
+
+//设置事项数据子项数据
+message protocol_schedule_item
+{
+  uint32 schedule_id = 1;//1bytes 事项id
+  disp_status status = 2;//1bytes  DISP_ON 显示 ;   DISP_OFF-不显示
+  uint32 year = 3;//2bytes 年份
+  uint32 mon = 4;
+  uint32 day = 5;
+  uint32 hour = 6;//1bytes
+  uint32 minute = 7;//1bytes
+  uint32 sec = 8;
+  repeated bool repeat = 9; //7bytes 重复 周一到周日
+  uint32 title_len = 10;//1bytes
+  uint32 content_len = 11;//1bytes
+  string title = 12;//max:70
+  string content = 13;//max:150
+};
+
+message protocol_schedule_operate
+{
+  operate_II_type operate = 1; //1bytes 操作类型
+  notify_type notify_flag = 2; //1bytes 通知类型
+  uint32 item_num = 3; //items的个数， 操作类型1,2,3，每次发送1个item数据 查询的时候填0
+  protocol_schedule_item schedule_item = 4;//事项数据item
+}
+
+message protocol_schedule_inquire_reply
+{
+  uint32 func_table = 1;//1bytes 功能表
+  operate_II_type operate = 2; //1bytes 操作类型
+  notify_type notify_flag = 3; //1bytes 通知类型
+  uint32 item_num = 4; //items的个数， 操作类型1,2,3，每次发送1个item数据 查询的时候填0
+  protocol_schedule_item schedule_item = 5;//事项数据item
+}

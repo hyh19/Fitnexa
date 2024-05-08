@@ -1,0 +1,35 @@
+syntax = "proto3";
+option java_package = "com.creek.health.data.infrastructure.proto";
+option java_outer_classname = "SyncSleepProto";
+
+message SyncSleep {
+  uint64 user_id = 1;
+  string mac_id = 2;
+  string fall_asleep_time = 3;
+  string get_up_time = 4;
+  uint32 total_sleep_duration = 5;
+  uint32 total_wake_duration = 6;
+  uint32 total_sleep_light_duration = 7;
+  uint32 total_sleep_deep_duration = 8;
+  uint32 total_rem_duration = 9;
+  uint32 wake_count = 10;
+  uint32 sleep_light_count = 11;
+  uint32 sleep_deep_count = 12;
+  uint32 rem_count = 13;
+  uint32 sleep_score = 14;
+  string datas = 15;
+  uint64 id = 16;
+}
+
+message SyncSleepList {
+  repeated SyncSleep list = 1;
+}
+
+message SyncSleepGroup {
+  string groupDate=1;
+  repeated SyncSleep list = 2;
+}
+
+message SyncSleepGroupProto {
+  repeated SyncSleepGroup sleepGroup = 1;
+}

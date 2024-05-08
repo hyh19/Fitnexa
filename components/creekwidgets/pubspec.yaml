@@ -1,0 +1,34 @@
+name: creekwidgets
+description: A new Flutter project.
+version: 0.0.2
+homepage:
+
+environment:
+  sdk: '>=2.19.0 <3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  plugin_platform_interface: ^2.1.6
+
+
+  creekbase:
+    path: ../creekbase
+
+    #svg图片加载
+  flutter_svg: ^2.0.9
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.1
+dependency_overrides:
+  intl: ^0.18.1
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/
+    - assets/svg/
+
+
+
+

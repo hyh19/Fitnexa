@@ -22,6 +22,29 @@ dependencies:
   permission_handler: ^11.1.0
   images_picker: ^1.2.11
   flutter_contacts: ^1.1.7+1
+  # 本地插件引用
+  creekbase:
+    path: components/creekbase
+  creekwidgets:
+    path: components/creekwidgets
+  creekchart:
+    path: components/creekchart
+  creek_blue_manage:
+    path: components/creekbluemanage
+  creekmap:
+    path: components/creekmap
+  creek_notification_listener:
+    path: components/creek_notification_listener
+  creekhttp:
+    path: components/creekhttp
+  creekdial:
+    path: components/creekdial
+  fl_chart:
+    path: components/fl_chart
+  creekhealth:
+    path: components/creekhealth
+  creekbusiness:
+    path: components/creekbusiness
 dev_dependencies: 
   flutter_test: 
     sdk: flutter

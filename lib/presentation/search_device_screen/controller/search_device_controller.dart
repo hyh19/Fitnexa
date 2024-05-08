@@ -230,13 +230,13 @@ class SearchDeviceController extends GetxController {
           //     arguments: 1,
           //     parameters: {"address": blueDeviceInfo.device?.id.id ?? ""});
         } else {
-          // Get.toNamed(Routes.paringWatchPage,
-          //     arguments: blueDeviceInfo,
-          //     parameters: {'state': '7', "page": "0"});
+          Get.toNamed(AppRoutes.pairingWatchScreen,
+              arguments: blueDeviceInfo,
+              parameters: {'state': '7', "page": "0"});
         }
       } else {
-        // Get.toNamed(Routes.paringWatchPage,
-        //     arguments: blueDeviceInfo, parameters: {'state': '4', "page": "0"});
+        Get.toNamed(AppRoutes.pairingWatchScreen,
+            arguments: blueDeviceInfo, parameters: {'state': '4', "page": "0"});
       }
       update();
     };

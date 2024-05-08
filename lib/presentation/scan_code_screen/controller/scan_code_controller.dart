@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:qr_code_scanner/qr_code_scanner.dart';
+
 import '../../../core/app_export.dart';
 import '../../../data/apiClient/api_client.dart';
 import '../../../data/models/listUser/post_list_user_resp.dart';
@@ -12,6 +14,10 @@ class ScanCodeController extends GetxController {
   Rx<ScanCodeModel> scanCodeModelObj = ScanCodeModel().obs;
 
   PostListUserResp postListUserResp = PostListUserResp();
+
+  final qrKey = GlobalKey(debugLabel: 'QR');
+  Barcode? result;
+  QRViewController? controller;
 
   /// Calls the https://nodedemo.dhiwise.co/device/api/v1/user/list API with the specified request data.
   ///
@@ -35,4 +41,18 @@ class ScanCodeController extends GetxController {
 
   /// handles the success response for the API
   void _handleListUserSuccess() {}
+
+  void onQRViewCreated(QRViewController controller) {
+    this.controller = controller;
+    controller.scannedDataStream.listen((scanData) {
+      result = scanData;
+      update();
+    });
+  }
+
+  @override
+  void onClose() {
+    controller?.dispose();
+    super.onClose();
+  }
 }

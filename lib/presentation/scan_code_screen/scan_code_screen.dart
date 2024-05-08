@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:qr_code_scanner/qr_code_scanner.dart';
+
 import '../../core/app_export.dart';
 import '../../data/models/listUser/post_list_user_req.dart';
 import '../../data/models/listUser/post_list_user_resp.dart';
@@ -11,20 +13,51 @@ class ScanCodeScreen extends GetWidget<ScanCodeController> {
           key: key,
         );
 
+  // @override
+  // Widget build(BuildContext context) {
+  //   return SafeArea(
+  //     child: Scaffold(
+  //       backgroundColor: theme.colorScheme.onErrorContainer.withOpacity(1),
+  //       body: Container(
+  //         width: double.maxFinite,
+  //         padding: EdgeInsets.symmetric(horizontal: 25.h),
+  //         child: Column(
+  //           crossAxisAlignment: CrossAxisAlignment.start,
+  //           mainAxisAlignment: MainAxisAlignment.center,
+  //           children: [SizedBox(height: 43.v), _buildScanCodeScreenGeneral()],
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
+
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: theme.colorScheme.onErrorContainer.withOpacity(1),
-        body: Container(
-          width: double.maxFinite,
-          padding: EdgeInsets.symmetric(horizontal: 25.h),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [SizedBox(height: 43.v), _buildScanCodeScreenGeneral()],
+    return Scaffold(
+      body: Column(
+        children: <Widget>[
+          Expanded(
+            flex: 5,
+            child: QRView(
+              key: controller.qrKey,
+              onQRViewCreated: controller.onQRViewCreated,
+            ),
           ),
-        ),
+          Expanded(
+            flex: 1,
+            child: Center(
+              child: GetBuilder<ScanCodeController>(
+                builder: (_) {
+                  if (controller.result != null) {
+                    return Text('Scan Result: ${controller.result!.code}');
+                  } else {
+                    return Text('Scan a code');
+                  }
+                },
+              ),
+            ),
+          )
+        ],
       ),
     );
   }

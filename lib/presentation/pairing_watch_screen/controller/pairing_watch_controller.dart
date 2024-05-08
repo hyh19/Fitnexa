@@ -194,6 +194,7 @@ class PairingWatchController extends GetxController with CodeAutoFill {
       isParingSuccess = true;
       setState(2);
       update();
+      Get.offNamed(AppRoutes.pairingSuccessScreen);
     },
         pairCodeCallBack: pairCodeCallBack,
         errorCallBack: errorCallBack,

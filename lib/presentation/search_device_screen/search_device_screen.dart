@@ -38,12 +38,38 @@ class SearchDeviceScreen extends GetWidget<SearchDeviceController> {
               ),
               SizedBox(height: 28.v),
               Expanded(child: _buildListView()),
+              _buildBindedDevice(),
               SizedBox(height: 5.v)
             ],
           ),
         ),
         bottomNavigationBar: _buildScanQrCode(),
       ),
+    );
+  }
+
+  Widget _buildBindedDevice() {
+    return GetBuilder<SearchDeviceController>(
+      builder: (controller) {
+        return Offstage(
+            offstage: controller.currentBluetoothDevice == null,
+            child: controller.currentBluetoothDevice == null
+                ? Container()
+                : Opacity(
+                    opacity: 0.5,
+                    child: IgnorePointer(
+                      ignoring: true,
+                      child: ListTile(
+                        title: Text(
+                            controller.currentBluetoothDevice?.device?.name ??
+                                ''),
+                        subtitle: Text(controller
+                                .currentBluetoothDevice?.device?.id
+                                .toString() ??
+                            ''),
+                      ),
+                    )));
+      },
     );
   }
 

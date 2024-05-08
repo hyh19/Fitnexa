@@ -47,6 +47,7 @@ class PairingWatchController extends GetxController with CodeAutoFill {
   @override
   void onInit() {
     super.onInit();
+    listenForCode();
     isParingSuccess = false;
     // controller1 = TextEditingController();
     // controller2 = TextEditingController();
@@ -138,6 +139,12 @@ class PairingWatchController extends GetxController with CodeAutoFill {
   /// The message is obtained from the `PostListUserResp` object.
   void _onListUserError() {
     Get.rawSnackbar(message: postListUserResp.message.toString() ?? '');
+  }
+
+  void bindDevice() {
+    var pairCode = List.of(otpController.value.text.codeUnits);
+    pairCode.add(0);
+    commonBindingDevice(blueDeviceInfo!, pairCode);
   }
 
   Future<void> commonBindingDevice(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+
 import '../../core/app_export.dart';
 import '../../data/models/listUser/post_list_user_req.dart';
 import '../../data/models/listUser/post_list_user_resp.dart';
@@ -152,12 +153,12 @@ class PairingWatchScreen extends GetWidget<PairingWatchController> {
           ),
           GestureDetector(
             onTap: () {
-              callApi();
+              controller.bindDevice();
             },
             child: Padding(
               padding: EdgeInsets.only(bottom: 71.v),
               child: Text(
-                "lbl_network".tr,
+                "绑定",
                 style: CustomTextStyles.bodyLargeBlack900,
               ),
             ),

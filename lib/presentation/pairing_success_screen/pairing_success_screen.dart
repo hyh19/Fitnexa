@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+
 import '../../core/app_export.dart';
 import '../../data/models/listUser/post_list_user_req.dart';
 import '../../data/models/listUser/post_list_user_resp.dart';
@@ -14,44 +15,42 @@ class PairingSuccessScreen extends GetWidget<PairingSuccessController> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: theme.colorScheme.onErrorContainer.withOpacity(1),
-        body: Container(
-          width: double.maxFinite,
-          padding: EdgeInsets.only(
-            left: 30.h,
-            right: 30.h,
-            bottom: 75.v,
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              SizedBox(height: 66.v),
-              Container(
-                height: 196.adaptSize,
-                width: 196.adaptSize,
-                decoration: BoxDecoration(
-                  color: appTheme.blueGray100,
-                ),
-              ),
-              SizedBox(height: 33.v),
-              Text(
-                "lbl_success2".tr,
-                style: theme.textTheme.headlineLarge,
-              ),
-              SizedBox(height: 8.v),
-              Text(
-                "msg_the_watch_has_been".tr,
-                style: CustomTextStyles.bodyLargeMiSansVFPrimaryContainer,
-              ),
-              SizedBox(height: 96.v),
-              _buildPairingSuccessGeneral()
-            ],
-          ),
+    return Scaffold(
+      backgroundColor: theme.colorScheme.onErrorContainer.withOpacity(1),
+      body: Container(
+        width: double.maxFinite,
+        padding: EdgeInsets.only(
+          left: 30.h,
+          right: 30.h,
+          bottom: 75.v,
         ),
-        bottomNavigationBar: _buildGetStartedButton(),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            SizedBox(height: 66.v),
+            Container(
+              height: 196.adaptSize,
+              width: 196.adaptSize,
+              decoration: BoxDecoration(
+                color: appTheme.blueGray100,
+              ),
+            ),
+            SizedBox(height: 33.v),
+            Text(
+              "lbl_success2".tr,
+              style: theme.textTheme.headlineLarge,
+            ),
+            SizedBox(height: 8.v),
+            Text(
+              "msg_the_watch_has_been".tr,
+              style: CustomTextStyles.bodyLargeMiSansVFPrimaryContainer,
+            ),
+            SizedBox(height: 96.v),
+            _buildPairingSuccessGeneral()
+          ],
+        ),
       ),
+      bottomNavigationBar: _buildGetStartedButton(),
     );
   }
 

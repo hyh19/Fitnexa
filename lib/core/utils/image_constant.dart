@@ -63,6 +63,8 @@ class ImageConstant {
 
   static String imgArrowLeft = '$imagePath/img_arrow_left.svg';
 
+  static String imgArrowBack = '$imagePath/img_arrow_back.svg';
+
   static String imgRectangle206770 = '$imagePath/img_rectangle_206770.svg';
 
   static String imgEye = '$imagePath/img_eye.svg';
@@ -70,4 +72,6 @@ class ImageConstant {
   static String imgProfile = '$imagePath/img_profile.svg';
 
   static String imgRefresh = '$imagePath/img_refresh.svg';
+
+  static String imgHelp = '$imagePath/img_help.svg';
 }

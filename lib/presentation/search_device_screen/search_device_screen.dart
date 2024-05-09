@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../core/app_export.dart';
 import '../../data/models/listUser/post_list_user_req.dart';
 import '../../data/models/listUser/post_list_user_resp.dart';
-import '../../widgets/app_bar/appbar_leading_image.dart';
-import '../../widgets/app_bar/appbar_trailing_iconbutton.dart';
-import '../../widgets/app_bar/custom_app_bar.dart';
 import '../../widgets/custom_elevated_button.dart';
 import 'controller/search_device_controller.dart'; // ignore_for_file: must_be_immutable
 
@@ -49,6 +47,33 @@ class SearchDeviceScreen extends GetWidget<SearchDeviceController> {
     );
   }
 
+  AppBar _buildAppBar() {
+    return AppBar(
+      leading: IconButton(
+        icon: SvgPicture.asset(
+          ImageConstant.imgArrowBack,
+          width: 28,
+          height: 28,
+        ),
+        onPressed: () {
+          Get.back();
+        },
+      ),
+      actions: <Widget>[
+        IconButton(
+          icon: SvgPicture.asset(
+            ImageConstant.imgHelp,
+            width: 28,
+            height: 28,
+          ),
+          onPressed: () {
+            Get.back();
+          },
+        ),
+      ],
+    );
+  }
+
   Widget _buildBindedDevice() {
     return GetBuilder<SearchDeviceController>(
       builder: (controller) {
@@ -71,27 +96,6 @@ class SearchDeviceScreen extends GetWidget<SearchDeviceController> {
                       ),
                     )));
       },
-    );
-  }
-
-  /// Section Widget
-  PreferredSizeWidget _buildAppBar() {
-    return CustomAppBar(
-      leadingWidth: 55.h,
-      leading: AppbarLeadingImage(
-        imagePath: ImageConstant.imgArrowDown,
-        margin: EdgeInsets.only(
-          left: 36.h,
-          top: 19.v,
-          bottom: 20.v,
-        ),
-      ),
-      actions: [
-        AppbarTrailingIconbutton(
-          imagePath: ImageConstant.imgProfile,
-          margin: EdgeInsets.fromLTRB(36.h, 17.v, 36.h, 18.v),
-        )
-      ],
     );
   }
 

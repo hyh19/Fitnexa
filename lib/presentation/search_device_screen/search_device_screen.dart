@@ -18,33 +18,34 @@ class SearchDeviceScreen extends GetWidget<SearchDeviceController> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: theme.colorScheme.onErrorContainer.withOpacity(1),
-        appBar: _buildAppBar(),
-        body: Container(
-          width: double.maxFinite,
-          padding: EdgeInsets.symmetric(vertical: 1.v),
-          child: Column(
-            children: [
-              Text(
-                "lbl_search_device".tr,
-                style: theme.textTheme.headlineLarge,
+    return Scaffold(
+      backgroundColor: theme.colorScheme.onErrorContainer.withOpacity(1),
+      appBar: _buildAppBar(),
+      body: Container(
+        width: double.maxFinite,
+        padding: EdgeInsets.symmetric(vertical: 1.v),
+        child: Column(
+          children: [
+            Text(
+              "lbl_search_device".tr,
+              style: theme.textTheme.headlineLarge,
+            ),
+            SizedBox(height: 15.v),
+            Text(
+              "msg_searching_nearby".tr,
+              style: TextStyle(
+                color: Color(0x801C1C26),
+                fontSize: 16.0,
               ),
-              SizedBox(height: 15.v),
-              Text(
-                "msg_searching_nearby".tr,
-                style: CustomTextStyles.bodyLargeMiSansVFSecondaryContainer,
-              ),
-              SizedBox(height: 28.v),
-              Expanded(child: _buildListView()),
-              _buildBindedDevice(),
-              SizedBox(height: 5.v)
-            ],
-          ),
+            ),
+            SizedBox(height: 28.v),
+            Expanded(child: _buildListView()),
+            _buildBindedDevice(),
+            SizedBox(height: 5.v)
+          ],
         ),
-        bottomNavigationBar: _buildScanQrCode(),
       ),
+      bottomNavigationBar: _buildScanQrCode(),
     );
   }
 

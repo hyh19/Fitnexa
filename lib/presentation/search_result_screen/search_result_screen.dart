@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+
 import '../../core/app_export.dart';
 import '../../data/models/listUser/post_list_user_req.dart';
 import '../../data/models/listUser/post_list_user_resp.dart';
@@ -18,27 +19,25 @@ class SearchResultScreen extends GetWidget<SearchResultController> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: theme.colorScheme.onErrorContainer.withOpacity(1),
-        appBar: _buildAppBar(),
-        body: Container(
-          width: double.maxFinite,
-          padding: EdgeInsets.symmetric(vertical: 2.v),
-          child: Column(
-            children: [
-              Spacer(
-                flex: 48,
-              ),
-              _buildGeneral(),
-              Spacer(
-                flex: 51,
-              )
-            ],
-          ),
+    return Scaffold(
+      backgroundColor: theme.colorScheme.onErrorContainer.withOpacity(1),
+      appBar: _buildAppBar(),
+      body: Container(
+        width: double.maxFinite,
+        padding: EdgeInsets.symmetric(vertical: 2.v),
+        child: Column(
+          children: [
+            Spacer(
+              flex: 48,
+            ),
+            _buildGeneral(),
+            Spacer(
+              flex: 51,
+            )
+          ],
         ),
-        bottomNavigationBar: _buildScanQRCode(),
       ),
+      bottomNavigationBar: _buildScanQRCode(),
     );
   }
 

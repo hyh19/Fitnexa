@@ -5,6 +5,7 @@ import 'package:qr_code_scanner/qr_code_scanner.dart';
 import '../../core/app_export.dart';
 import '../../data/models/listUser/post_list_user_req.dart';
 import '../../data/models/listUser/post_list_user_resp.dart';
+import '../../widgets/custom_icon_button.dart';
 import 'controller/scan_code_controller.dart'; // ignore_for_file: must_be_immutable
 
 class ScanCodeScreen extends GetWidget<ScanCodeController> {
@@ -38,9 +39,48 @@ class ScanCodeScreen extends GetWidget<ScanCodeController> {
         children: <Widget>[
           Expanded(
             flex: 5,
-            child: QRView(
-              key: controller.qrKey,
-              onQRViewCreated: controller.onQRViewCreated,
+            child: Stack(
+              children: [
+                QRView(
+                  key: controller.qrKey,
+                  onQRViewCreated: controller.onQRViewCreated,
+                ),
+                SizedBox(
+                  width: double.maxFinite,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(height: 72.v),
+                      Container(
+                        height: 328.v,
+                        width: 267.h,
+                        decoration: BoxDecoration(
+                          color: Colors.black.withOpacity(0.5),
+                        ),
+                      ),
+                      SizedBox(height: 38.v),
+                      Opacity(
+                        opacity: 0.9,
+                        child: Text(
+                          "msg_scan_the_qr_code".tr,
+                          style: TextStyle(color: Colors.white, fontSize: 16),
+                        ),
+                      ),
+                      SizedBox(height: 87.v),
+                      CustomIconButton(
+                        height: 80.adaptSize,
+                        width: 80.adaptSize,
+                        child: CustomImageView(
+                          imagePath: ImageConstant.imgIcon40,
+                        ),
+                        onTap: () {
+                          // TODO: 打开闪光灯
+                        },
+                      )
+                    ],
+                  ),
+                )
+              ],
             ),
           ),
           Expanded(

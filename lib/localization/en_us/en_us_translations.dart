@@ -132,6 +132,9 @@ final Map<String, String> enUs = {
   "lbl_cw_watch_s1": "CW Watch S1",
   "msg_cf_8b_3c_0c_18_bf": "CF:8B:3C:0C:18:BF",
 
+  // Scan QRCode Screen One Screen
+  "msg_scan_the_qr_code": "Scan the QR code on the watch",
+
   // Network Error String
   "msg_network_err": "Network Error",
   "msg_something_went_wrong": "Something Went Wrong!",

@@ -6,7 +6,6 @@ import 'package:qr_code_scanner/qr_code_scanner.dart';
 import '../../core/app_export.dart';
 import '../../data/models/listUser/post_list_user_req.dart';
 import '../../data/models/listUser/post_list_user_resp.dart';
-import '../../widgets/custom_icon_button.dart';
 import 'controller/scan_code_controller.dart'; // ignore_for_file: must_be_immutable
 
 class ScanCodeScreen extends GetWidget<ScanCodeController> {
@@ -70,16 +69,7 @@ class ScanCodeScreen extends GetWidget<ScanCodeController> {
                         ),
                       ),
                       SizedBox(height: 87.v),
-                      CustomIconButton(
-                        height: 80.adaptSize,
-                        width: 80.adaptSize,
-                        child: CustomImageView(
-                          imagePath: ImageConstant.imgIcon40,
-                        ),
-                        onTap: () {
-                          // TODO: 打开闪光灯
-                        },
-                      )
+                      _buildFlashlight()
                     ],
                   ),
                 )
@@ -102,6 +92,19 @@ class ScanCodeScreen extends GetWidget<ScanCodeController> {
           )
         ],
       ),
+    );
+  }
+
+  Widget _buildFlashlight() {
+    return IconButton(
+      icon: SvgPicture.asset(
+        ImageConstant.imgFlashlight,
+        width: 80,
+        height: 80,
+      ),
+      onPressed: () {
+        // TODO: 打开闪光灯
+      },
     );
   }
 

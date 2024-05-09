@@ -55,10 +55,10 @@ class ImageConstant {
 
   static String imageNotFound = 'assets/images/image_not_found.png';
 
-  // Scan QRCode Screen One images
-  static String imgIcon40 = '$imagePath/img_icon_40.svg';
+  // Scan QRCode Screen images
+  static String imgFlashlight = '$imagePath/img_flashlight.svg';
 
-// Common images
+  // Common images
   static String imgArrowDown = '$imagePath/img_arrow_down.svg';
 
   static String imgArrowLeft = '$imagePath/img_arrow_left.svg';

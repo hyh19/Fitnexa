@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:lottie/lottie.dart';
 
 import '../../core/app_export.dart';
 import '../../data/models/listUser/post_list_user_req.dart';
@@ -39,8 +40,7 @@ class SearchDeviceScreen extends GetWidget<SearchDeviceController> {
               ),
             ),
             SizedBox(height: 28.v),
-            Expanded(child: _buildListView()),
-            _buildBindedDevice(),
+            _buildScanAnimation(),
             SizedBox(height: 5.v)
           ],
         ),
@@ -189,6 +189,16 @@ class SearchDeviceScreen extends GetWidget<SearchDeviceController> {
             ),
           )
         ],
+      ),
+    );
+  }
+
+  Widget _buildScanAnimation() {
+    return Container(
+      width: 374,
+      height: 374,
+      child: Lottie.asset(
+        'assets/lottieFiles/scan_device.json',
       ),
     );
   }

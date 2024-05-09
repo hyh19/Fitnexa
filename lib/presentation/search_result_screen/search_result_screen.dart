@@ -23,21 +23,19 @@ class SearchResultScreen extends GetWidget<SearchResultController> {
       backgroundColor: theme.colorScheme.onErrorContainer.withOpacity(1),
       appBar: _buildAppBar(),
       body: Container(
-        width: double.maxFinite,
-        padding: EdgeInsets.symmetric(vertical: 2.v),
-        child: Column(
-          children: [
-            Spacer(
-              flex: 48,
-            ),
-            _buildGeneral(),
-            Spacer(
-              flex: 51,
-            )
-          ],
-        ),
-      ),
+          width: double.maxFinite,
+          padding: EdgeInsets.symmetric(vertical: 2.v),
+          child: _buildPageView()),
       bottomNavigationBar: _buildScanQRCode(),
+    );
+  }
+
+  PageView _buildPageView() {
+    return PageView.builder(
+      itemCount: 5,
+      itemBuilder: (_, index) =>
+          _buildDeviceInfo("CW Watch S1", "CF:8B:3C:0C:18:BF"),
+      onPageChanged: (index) {},
     );
   }
 
@@ -74,8 +72,8 @@ class SearchResultScreen extends GetWidget<SearchResultController> {
     );
   }
 
-  /// Section Widget
-  Widget _buildGeneral() {
+  /// 手表信息
+  Widget _buildDeviceInfo(String name, String mac) {
     return SizedBox(
       width: double.maxFinite,
       child: Column(
@@ -88,12 +86,12 @@ class SearchResultScreen extends GetWidget<SearchResultController> {
           ),
           SizedBox(height: 34.v),
           Text(
-            "lbl_cw_watch_s1".tr,
+            name,
             style: theme.textTheme.headlineLarge,
           ),
           SizedBox(height: 24.v),
           Text(
-            "msg_cf_8b_3c_0c_18_bf".tr,
+            mac,
             style: CustomTextStyles.bodyLargeMiSansVFPrimaryContainer,
           ),
           SizedBox(height: 6.v)

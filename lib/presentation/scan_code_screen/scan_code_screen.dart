@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
@@ -35,6 +36,8 @@ class ScanCodeScreen extends GetWidget<ScanCodeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: _buildAppBar(),
       body: Column(
         children: <Widget>[
           Expanded(
@@ -102,92 +105,19 @@ class ScanCodeScreen extends GetWidget<ScanCodeController> {
     );
   }
 
-  /// Section Widget
-  Widget _buildScanCodeScreenGeneral() {
-    return Padding(
-      padding: EdgeInsets.only(right: 22.h),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: EdgeInsets.only(bottom: 35.v),
-            child: Column(
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    navigateToPairing();
-                  },
-                  child: Text(
-                    "lbl_next".tr,
-                    style: CustomTextStyles.bodyLargeBlack900,
-                  ),
-                ),
-                SizedBox(height: 16.v),
-                GestureDetector(
-                  onTap: () {
-                    onBackPressed();
-                  },
-                  child: Text(
-                    "lbl_back".tr,
-                    style: CustomTextStyles.bodyLargeBlack900,
-                  ),
-                )
-              ],
-            ),
-          ),
-          Spacer(
-            flex: 47,
-          ),
-          GestureDetector(
-            onTap: () {
-              callApi();
-            },
-            child: Padding(
-              padding: EdgeInsets.only(bottom: 71.v),
-              child: Text(
-                "lbl_network".tr,
-                style: CustomTextStyles.bodyLargeBlack900,
-              ),
-            ),
-          ),
-          Spacer(
-            flex: 52,
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              GestureDetector(
-                onTap: () {
-                  showDialog();
-                },
-                child: Text(
-                  "lbl_alert".tr,
-                  style: CustomTextStyles.bodyLargeBlack900,
-                ),
-              ),
-              SizedBox(height: 16.v),
-              GestureDetector(
-                onTap: () {
-                  showToast();
-                },
-                child: Text(
-                  "lbl_toast".tr,
-                  style: CustomTextStyles.bodyLargeBlack900,
-                ),
-              ),
-              SizedBox(height: 15.v),
-              GestureDetector(
-                onTap: () {
-                  showSnackbar();
-                },
-                child: Text(
-                  "lbl_snackbar".tr,
-                  style: CustomTextStyles.bodyLargeBlack900,
-                ),
-              )
-            ],
-          )
-        ],
+  AppBar _buildAppBar() {
+    return AppBar(
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      leading: IconButton(
+        icon: SvgPicture.asset(
+          ImageConstant.imgArrowBackWhite,
+          width: 28,
+          height: 28,
+        ),
+        onPressed: () {
+          Get.back();
+        },
       ),
     );
   }

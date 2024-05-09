@@ -65,6 +65,8 @@ class ImageConstant {
 
   static String imgArrowBack = '$imagePath/img_arrow_back.svg';
 
+  static String imgArrowBackWhite = '$imagePath/img_arrow_back_white.svg';
+
   static String imgRectangle206770 = '$imagePath/img_rectangle_206770.svg';
 
   static String imgEye = '$imagePath/img_eye.svg';

@@ -31,9 +31,7 @@ class PairingSuccessScreen extends GetWidget<PairingSuccessController> {
             Container(
               height: 196.adaptSize,
               width: 196.adaptSize,
-              decoration: BoxDecoration(
-                color: appTheme.blueGray100,
-              ),
+              child: Image.asset(ImageConstant.imgCw06g),
             ),
             SizedBox(height: 33.v),
             Text(
@@ -46,7 +44,6 @@ class PairingSuccessScreen extends GetWidget<PairingSuccessController> {
               style: CustomTextStyles.bodyLargeMiSansVFPrimaryContainer,
             ),
             SizedBox(height: 96.v),
-            _buildPairingSuccessGeneral()
           ],
         ),
       ),

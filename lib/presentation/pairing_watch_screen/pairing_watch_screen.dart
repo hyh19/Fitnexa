@@ -1,11 +1,13 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:pin_code_fields/pin_code_fields.dart';
 
 import '../../core/app_export.dart';
 import '../../data/models/listUser/post_list_user_req.dart';
 import '../../data/models/listUser/post_list_user_resp.dart';
-import '../../widgets/custom_pin_code_text_field.dart';
 import 'controller/pairing_watch_controller.dart'; // ignore_for_file: must_be_immutable
 
 class PairingWatchScreen extends GetWidget<PairingWatchController> {
@@ -16,77 +18,106 @@ class PairingWatchScreen extends GetWidget<PairingWatchController> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        backgroundColor: theme.colorScheme.onErrorContainer.withOpacity(1),
-        appBar: _buildAppBar(),
-        body: Container(
-          width: double.maxFinite,
-          padding: EdgeInsets.symmetric(
-            horizontal: 25.h,
-            vertical: 5.v,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: EdgeInsets.only(
-                  left: 7.h,
-                  right: 49.h,
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      width: 248.h,
-                      margin: EdgeInsets.only(right: 35.h),
-                      child: Text(
-                        "msg_pairing_with_your".tr,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: theme.textTheme.headlineLarge,
-                      ),
+    TextEditingController textEditingController = TextEditingController();
+    StreamController<ErrorAnimationType>? errorController =
+        StreamController<ErrorAnimationType>();
+
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      backgroundColor: theme.colorScheme.onErrorContainer.withOpacity(1),
+      appBar: _buildAppBar(),
+      body: Container(
+        width: double.maxFinite,
+        padding: EdgeInsets.symmetric(
+          horizontal: 25.h,
+          vertical: 5.v,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: EdgeInsets.only(
+                left: 7.h,
+                right: 49.h,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    width: 248.h,
+                    margin: EdgeInsets.only(right: 35.h),
+                    child: Text(
+                      "msg_pairing_with_your".tr,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: theme.textTheme.headlineLarge,
                     ),
-                    SizedBox(height: 12.v),
-                    SizedBox(
-                      width: 283.h,
-                      child: Text(
-                        "msg_please_enter_the".tr,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style:
-                            CustomTextStyles.bodyLargeMiSansVFPrimaryContainer,
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              Spacer(
-                flex: 25,
-              ),
-              Padding(
-                padding: EdgeInsets.only(
-                  left: 7.h,
-                  right: 8.h,
-                ),
-                child: Obx(
-                  () => CustomPinCodeTextField(
-                    context: Get.context!,
-                    controller: controller.otpController.value,
-                    onChanged: (value) {},
                   ),
+                  SizedBox(height: 12.v),
+                  SizedBox(
+                    width: 283.h,
+                    child: Text(
+                      "msg_please_enter_the".tr,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: CustomTextStyles.bodyLargeMiSansVFPrimaryContainer,
+                    ),
+                  )
+                ],
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(
+                left: 7.h,
+                right: 8.h,
+                top: 30.v,
+              ),
+              child: PinCodeTextField(
+                appContext: context,
+                pastedTextStyle: TextStyle(
+                  color: Colors.green.shade600,
+                  fontWeight: FontWeight.bold,
                 ),
+                length: 4,
+                animationType: AnimationType.fade,
+                pinTheme: PinTheme(
+                  shape: PinCodeFieldShape.box,
+                  borderRadius: BorderRadius.circular(5),
+                  fieldHeight: 70.v,
+                  fieldWidth: 70.h,
+                  inactiveFillColor: Color(0xFFF6F6F9),
+                  inactiveColor: Colors.white,
+                  activeFillColor: Colors.white,
+                  selectedFillColor: Colors.white,
+                ),
+                cursorColor: Colors.black,
+                animationDuration: const Duration(milliseconds: 300),
+                enableActiveFill: true,
+                errorAnimationController: errorController,
+                controller: textEditingController,
+                keyboardType: TextInputType.number,
+                boxShadows: const [
+                  BoxShadow(
+                    offset: Offset(0, 1),
+                    color: Colors.black12,
+                    blurRadius: 10,
+                  )
+                ],
+                onCompleted: (v) {
+                  debugPrint("Completed");
+                },
+                onChanged: (value) {
+                  debugPrint(value);
+                },
+                beforeTextPaste: (text) {
+                  debugPrint("Allowing to paste $text");
+                  //if you return true then it will show the paste confirmation dialog. Otherwise if false, then nothing will happen.
+                  //but you can show anything you want here, like your pop up saying wrong paste format or etc
+                  return true;
+                },
               ),
-              Spacer(
-                flex: 44,
-              ),
-              _buildFooter(),
-              Spacer(
-                flex: 30,
-              )
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

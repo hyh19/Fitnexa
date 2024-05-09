@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../core/app_export.dart';
 import '../../data/models/listUser/post_list_user_req.dart';
 import '../../data/models/listUser/post_list_user_resp.dart';
-import '../../widgets/app_bar/appbar_leading_image.dart';
-import '../../widgets/app_bar/appbar_trailing_iconbutton.dart';
-import '../../widgets/app_bar/appbar_trailing_image.dart';
-import '../../widgets/app_bar/custom_app_bar.dart';
 import '../../widgets/custom_elevated_button.dart';
 import 'controller/search_result_controller.dart'; // ignore_for_file: must_be_immutable
 
@@ -39,35 +36,39 @@ class SearchResultScreen extends GetWidget<SearchResultController> {
     );
   }
 
-  /// Section Widget
-  PreferredSizeWidget _buildAppBar() {
-    return CustomAppBar(
-      leadingWidth: 55.h,
-      leading: AppbarLeadingImage(
-        imagePath: ImageConstant.imgArrowDown,
-        margin: EdgeInsets.only(
-          left: 36.h,
-          top: 19.v,
-          bottom: 20.v,
+  AppBar _buildAppBar() {
+    return AppBar(
+      leading: IconButton(
+        icon: SvgPicture.asset(
+          ImageConstant.imgArrowBack,
+          width: 28,
+          height: 28,
         ),
+        onPressed: () {
+          Get.back();
+        },
       ),
-      actions: [
-        AppbarTrailingImage(
-          imagePath: ImageConstant.imgQrcode,
-          margin: EdgeInsets.only(
-            left: 36.h,
-            top: 17.v,
-            right: 17.h,
+      actions: <Widget>[
+        IconButton(
+          icon: SvgPicture.asset(
+            ImageConstant.imgRefresh,
+            width: 28,
+            height: 28,
           ),
+          onPressed: () {
+            // TODO: 重新扫描
+          },
         ),
-        AppbarTrailingIconbutton(
-          imagePath: ImageConstant.imgProfile,
-          margin: EdgeInsets.only(
-            left: 19.h,
-            top: 17.v,
-            right: 53.h,
+        IconButton(
+          icon: SvgPicture.asset(
+            ImageConstant.imgHelp,
+            width: 28,
+            height: 28,
           ),
-        )
+          onPressed: () {
+            // TODO: 跳到帮助
+          },
+        ),
       ],
     );
   }

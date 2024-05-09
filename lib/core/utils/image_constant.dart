@@ -50,6 +50,11 @@ class ImageConstant {
 
   static String imgCursor = '$imagePath/img_cursor.svg';
 
+  // Search Result Screen One images
+  static String imgCw06g = '$imagePath/img_cw06g.png';
+
+  static String imageNotFound = 'assets/images/image_not_found.png';
+
 // Common images
   static String imgArrowDown = '$imagePath/img_arrow_down.svg';
 
@@ -58,8 +63,6 @@ class ImageConstant {
   static String imgRectangle206770 = '$imagePath/img_rectangle_206770.svg';
 
   static String imgEye = '$imagePath/img_eye.svg';
-
-  static String imageNotFound = 'assets/images/image_not_found.png';
 
   static String imgProfile = '$imagePath/img_profile.svg';
 

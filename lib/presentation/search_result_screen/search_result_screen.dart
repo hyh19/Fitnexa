@@ -76,97 +76,27 @@ class SearchResultScreen extends GetWidget<SearchResultController> {
 
   /// Section Widget
   Widget _buildGeneral() {
-    return Container(
+    return SizedBox(
       width: double.maxFinite,
-      padding: EdgeInsets.symmetric(
-        horizontal: 25.h,
-        vertical: 148.v,
-      ),
-      decoration: AppDecoration.fillBlueGray,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Padding(
-            padding: EdgeInsets.only(bottom: 35.v),
-            child: Column(
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    onTapTxtNext();
-                  },
-                  child: Text(
-                    "lbl_next".tr,
-                    style: CustomTextStyles.bodyLargeBlack900,
-                  ),
-                ),
-                SizedBox(height: 16.v),
-                GestureDetector(
-                  onTap: () {
-                    onBackPressed();
-                  },
-                  child: Text(
-                    "lbl_back".tr,
-                    style: CustomTextStyles.bodyLargeBlack900,
-                  ),
-                )
-              ],
-            ),
+          CustomImageView(
+            imagePath: ImageConstant.imgCw06g,
+            height: 262.v,
+            width: 234.h,
           ),
-          Spacer(
-            flex: 47,
+          SizedBox(height: 34.v),
+          Text(
+            "lbl_cw_watch_s1".tr,
+            style: theme.textTheme.headlineLarge,
           ),
-          GestureDetector(
-            onTap: () {
-              callApi();
-            },
-            child: Padding(
-              padding: EdgeInsets.only(bottom: 71.v),
-              child: Text(
-                "lbl_network".tr,
-                style: CustomTextStyles.bodyLargeBlack900,
-              ),
-            ),
+          SizedBox(height: 24.v),
+          Text(
+            "msg_cf_8b_3c_0c_18_bf".tr,
+            style: CustomTextStyles.bodyLargeMiSansVFPrimaryContainer,
           ),
-          Spacer(
-            flex: 52,
-          ),
-          Padding(
-            padding: EdgeInsets.only(right: 22.h),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    showDialog();
-                  },
-                  child: Text(
-                    "lbl_alert".tr,
-                    style: CustomTextStyles.bodyLargeBlack900,
-                  ),
-                ),
-                SizedBox(height: 16.v),
-                GestureDetector(
-                  onTap: () {
-                    showToast();
-                  },
-                  child: Text(
-                    "lbl_toast".tr,
-                    style: CustomTextStyles.bodyLargeBlack900,
-                  ),
-                ),
-                SizedBox(height: 15.v),
-                GestureDetector(
-                  onTap: () {
-                    showSnackbar();
-                  },
-                  child: Text(
-                    "lbl_snackbar".tr,
-                    style: CustomTextStyles.bodyLargeBlack900,
-                  ),
-                )
-              ],
-            ),
-          )
+          SizedBox(height: 6.v)
         ],
       ),
     );

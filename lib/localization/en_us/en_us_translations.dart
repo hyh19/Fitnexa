@@ -128,7 +128,11 @@ final Map<String, String> enUs = {
   "msg_search_device_screen": "Search Device Screen",
   "msg_search_result_screen": "Search Result Screen",
 
-// Network Error String
+  // Search Result Screen One Screen
+  "lbl_cw_watch_s1": "CW Watch S1",
+  "msg_cf_8b_3c_0c_18_bf": "CF:8B:3C:0C:18:BF",
+
+  // Network Error String
   "msg_network_err": "Network Error",
   "msg_something_went_wrong": "Something Went Wrong!",
 };

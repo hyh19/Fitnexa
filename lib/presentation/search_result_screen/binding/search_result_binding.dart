@@ -1,3 +1,5 @@
+import 'package:fitnexa/presentation/search_device_screen/controller/search_device_controller.dart';
+
 import '../../../core/app_export.dart';
 import '../controller/search_result_controller.dart';
 
@@ -8,6 +10,7 @@ import '../controller/search_result_controller.dart';
 class SearchResultBinding extends Bindings {
   @override
   void dependencies() {
+    Get.lazyPut(() => SearchDeviceController());
     Get.lazyPut(() => SearchResultController());
   }
 }

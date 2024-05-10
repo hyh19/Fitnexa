@@ -155,6 +155,8 @@ class SearchDeviceController extends GetxController {
             if (connectBluetoothDevice != null) {
               dataList.remove(connectBluetoothDevice);
             }
+
+            navToSearchResult();
           }
           update();
         },
@@ -251,5 +253,12 @@ class SearchDeviceController extends GetxController {
     CreekLog.info('---removeConnectStateListen------');
     connectStateListen = null;
     CreekDeviceManger.instance.removeConnectStateListen();
+  }
+
+  /// 跳转到「搜索结果页」
+  void navToSearchResult() {
+    Get.toNamed(
+      AppRoutes.searchResultScreen,
+    );
   }
 }

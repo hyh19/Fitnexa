@@ -1,3 +1,4 @@
+import 'package:fitnexa/presentation/search_device_screen/controller/search_device_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -6,9 +7,8 @@ import '../../core/app_export.dart';
 import '../../data/models/listUser/post_list_user_req.dart';
 import '../../data/models/listUser/post_list_user_resp.dart';
 import '../../widgets/custom_elevated_button.dart';
-import 'controller/search_result_controller.dart'; // ignore_for_file: must_be_immutable
 
-class SearchResultScreen extends GetWidget<SearchResultController> {
+class SearchResultScreen extends GetWidget<SearchDeviceController> {
   const SearchResultScreen({Key? key})
       : super(
           key: key,
@@ -27,13 +27,18 @@ class SearchResultScreen extends GetWidget<SearchResultController> {
     );
   }
 
-  PageView _buildPageView() {
-    return PageView.builder(
-      itemCount: 5,
-      itemBuilder: (_, index) =>
-          _buildDeviceInfo("CW Watch S1", "CF:8B:3C:0C:18:BF"),
-      onPageChanged: (index) {},
-    );
+  Widget _buildPageView() {
+    return GetBuilder<SearchDeviceController>(builder: (_) {
+      return PageView.builder(
+        itemCount: controller.dataList.length,
+        itemBuilder: (_, index) {
+          final deviceInfo = controller.dataList[index];
+          return _buildDeviceInfo(
+              deviceInfo.device!.name, deviceInfo.device!.id.toString());
+        },
+        onPageChanged: (index) {},
+      );
+    });
   }
 
   AppBar _buildAppBar() {

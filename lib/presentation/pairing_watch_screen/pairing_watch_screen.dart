@@ -72,54 +72,62 @@ class PairingWatchScreen extends GetWidget<PairingWatchController> {
                 right: 8.h,
                 top: 30.v,
               ),
-              child: PinCodeTextField(
-                appContext: context,
-                pastedTextStyle: TextStyle(
-                  color: Colors.green.shade600,
-                  fontWeight: FontWeight.bold,
-                ),
-                length: 4,
-                animationType: AnimationType.fade,
-                pinTheme: PinTheme(
-                  shape: PinCodeFieldShape.box,
-                  borderRadius: BorderRadius.circular(5),
-                  fieldHeight: 70.v,
-                  fieldWidth: 70.h,
-                  inactiveFillColor: Color(0xFFF6F6F9),
-                  inactiveColor: Colors.white,
-                  activeFillColor: Colors.white,
-                  selectedFillColor: Colors.white,
-                ),
-                cursorColor: Colors.black,
-                animationDuration: const Duration(milliseconds: 300),
-                enableActiveFill: true,
-                errorAnimationController: errorController,
-                controller: textEditingController,
-                keyboardType: TextInputType.number,
-                boxShadows: const [
-                  BoxShadow(
-                    offset: Offset(0, 1),
-                    color: Colors.black12,
-                    blurRadius: 10,
-                  )
-                ],
-                onCompleted: (v) {
-                  debugPrint("Completed");
-                },
-                onChanged: (value) {
-                  debugPrint(value);
-                },
-                beforeTextPaste: (text) {
-                  debugPrint("Allowing to paste $text");
-                  //if you return true then it will show the paste confirmation dialog. Otherwise if false, then nothing will happen.
-                  //but you can show anything you want here, like your pop up saying wrong paste format or etc
-                  return true;
-                },
-              ),
+              child: _buildPinCodeTextField(
+                  context, errorController, textEditingController),
             ),
           ],
         ),
       ),
+    );
+  }
+
+  PinCodeTextField _buildPinCodeTextField(
+      BuildContext context,
+      StreamController<ErrorAnimationType> errorController,
+      TextEditingController textEditingController) {
+    return PinCodeTextField(
+      appContext: context,
+      pastedTextStyle: TextStyle(
+        color: Colors.green.shade600,
+        fontWeight: FontWeight.bold,
+      ),
+      length: 4,
+      animationType: AnimationType.fade,
+      pinTheme: PinTheme(
+        shape: PinCodeFieldShape.box,
+        borderRadius: BorderRadius.circular(5),
+        fieldHeight: 70.v,
+        fieldWidth: 70.h,
+        inactiveFillColor: Color(0xFFF6F6F9),
+        inactiveColor: Colors.white,
+        activeFillColor: Colors.white,
+        selectedFillColor: Colors.white,
+      ),
+      cursorColor: Colors.black,
+      animationDuration: const Duration(milliseconds: 300),
+      enableActiveFill: true,
+      errorAnimationController: errorController,
+      controller: textEditingController,
+      keyboardType: TextInputType.number,
+      boxShadows: const [
+        BoxShadow(
+          offset: Offset(0, 1),
+          color: Colors.black12,
+          blurRadius: 10,
+        )
+      ],
+      onCompleted: (v) {
+        debugPrint("Completed");
+      },
+      onChanged: (value) {
+        debugPrint(value);
+      },
+      beforeTextPaste: (text) {
+        debugPrint("Allowing to paste $text");
+        //if you return true then it will show the paste confirmation dialog. Otherwise if false, then nothing will happen.
+        //but you can show anything you want here, like your pop up saying wrong paste format or etc
+        return true;
+      },
     );
   }
 

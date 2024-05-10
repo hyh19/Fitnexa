@@ -33,8 +33,21 @@ class SearchResultScreen extends GetWidget<SearchDeviceController> {
         itemCount: controller.dataList.length,
         itemBuilder: (_, index) {
           final deviceInfo = controller.dataList[index];
-          return _buildDeviceInfo(
-              deviceInfo.device!.name, deviceInfo.device!.id.toString());
+          return GestureDetector(
+            child: _buildDeviceInfo(
+                deviceInfo.device!.name, deviceInfo.device!.id.toString()),
+            onTap: () {
+              if (controller.connectLoading) {
+                print("当前正在连接,不继续");
+                return;
+              }
+              // if (!BluListenUtils.instance.requestBlueOpenORCloseState()) {
+              //   BluListenUtils.instance.showBlueOpenORCloseState(context);
+              //   return;
+              // }
+              controller.connect(controller.dataList[index]);
+            },
+          );
         },
         onPageChanged: (index) {},
       );

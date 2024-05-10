@@ -141,8 +141,8 @@ class PairingWatchController extends GetxController with CodeAutoFill {
     Get.rawSnackbar(message: postListUserResp.message.toString() ?? '');
   }
 
-  void bindDevice() {
-    var pairCode = List.of(otpController.value.text.codeUnits);
+  void bindDevice(String pinCode) {
+    var pairCode = List.of(pinCode.codeUnits);
     pairCode.add(0);
     commonBindingDevice(blueDeviceInfo!, pairCode);
   }

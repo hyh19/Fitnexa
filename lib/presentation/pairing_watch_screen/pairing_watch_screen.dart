@@ -81,54 +81,56 @@ class PairingWatchScreen extends GetWidget<PairingWatchController> {
     );
   }
 
-  PinCodeTextField _buildPinCodeTextField(
+  Widget _buildPinCodeTextField(
       BuildContext context,
       StreamController<ErrorAnimationType> errorController,
       TextEditingController textEditingController) {
-    return PinCodeTextField(
-      appContext: context,
-      pastedTextStyle: TextStyle(
-        color: Colors.green.shade600,
-        fontWeight: FontWeight.bold,
-      ),
-      length: 4,
-      animationType: AnimationType.fade,
-      pinTheme: PinTheme(
-        shape: PinCodeFieldShape.box,
-        borderRadius: BorderRadius.circular(5),
-        fieldHeight: 70.v,
-        fieldWidth: 70.h,
-        inactiveFillColor: Color(0xFFF6F6F9),
-        inactiveColor: Colors.white,
-        activeFillColor: Colors.white,
-        selectedFillColor: Colors.white,
-      ),
-      cursorColor: Colors.black,
-      animationDuration: const Duration(milliseconds: 300),
-      enableActiveFill: true,
-      errorAnimationController: errorController,
-      controller: textEditingController,
-      keyboardType: TextInputType.number,
-      boxShadows: const [
-        BoxShadow(
-          offset: Offset(0, 1),
-          color: Colors.black12,
-          blurRadius: 10,
-        )
-      ],
-      onCompleted: (v) {
-        debugPrint("Completed");
-      },
-      onChanged: (value) {
-        debugPrint(value);
-      },
-      beforeTextPaste: (text) {
-        debugPrint("Allowing to paste $text");
-        //if you return true then it will show the paste confirmation dialog. Otherwise if false, then nothing will happen.
-        //but you can show anything you want here, like your pop up saying wrong paste format or etc
-        return true;
-      },
-    );
+    return GetBuilder<PairingWatchController>(builder: (_) {
+      return PinCodeTextField(
+        appContext: context,
+        pastedTextStyle: TextStyle(
+          color: Colors.green.shade600,
+          fontWeight: FontWeight.bold,
+        ),
+        length: 4,
+        animationType: AnimationType.fade,
+        pinTheme: PinTheme(
+          shape: PinCodeFieldShape.box,
+          borderRadius: BorderRadius.circular(5),
+          fieldHeight: 70.v,
+          fieldWidth: 70.h,
+          inactiveFillColor: Color(0xFFF6F6F9),
+          inactiveColor: Colors.white,
+          activeFillColor: Colors.white,
+          selectedFillColor: Colors.white,
+        ),
+        cursorColor: Colors.black,
+        animationDuration: const Duration(milliseconds: 300),
+        enableActiveFill: true,
+        errorAnimationController: errorController,
+        controller: textEditingController,
+        keyboardType: TextInputType.number,
+        boxShadows: const [
+          BoxShadow(
+            offset: Offset(0, 1),
+            color: Colors.black12,
+            blurRadius: 10,
+          )
+        ],
+        onCompleted: (v) {
+          controller.bindDevice(v);
+        },
+        onChanged: (value) {
+          debugPrint(value);
+        },
+        beforeTextPaste: (text) {
+          debugPrint("Allowing to paste $text");
+          //if you return true then it will show the paste confirmation dialog. Otherwise if false, then nothing will happen.
+          //but you can show anything you want here, like your pop up saying wrong paste format or etc
+          return true;
+        },
+      );
+    });
   }
 
   AppBar _buildAppBar() {
@@ -155,96 +157,6 @@ class PairingWatchScreen extends GetWidget<PairingWatchController> {
           },
         ),
       ],
-    );
-  }
-
-  /// Section Widget
-  Widget _buildFooter() {
-    return Padding(
-      padding: EdgeInsets.only(right: 22.h),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: EdgeInsets.only(bottom: 35.v),
-            child: Column(
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    onTapTxtNext();
-                  },
-                  child: Text(
-                    "lbl_next".tr,
-                    style: CustomTextStyles.bodyLargeBlack900,
-                  ),
-                ),
-                SizedBox(height: 16.v),
-                GestureDetector(
-                  onTap: () {
-                    onBackPressed();
-                  },
-                  child: Text(
-                    "lbl_back".tr,
-                    style: CustomTextStyles.bodyLargeBlack900,
-                  ),
-                )
-              ],
-            ),
-          ),
-          Spacer(
-            flex: 47,
-          ),
-          GestureDetector(
-            onTap: () {
-              controller.bindDevice();
-            },
-            child: Padding(
-              padding: EdgeInsets.only(bottom: 71.v),
-              child: Text(
-                "绑定",
-                style: CustomTextStyles.bodyLargeBlack900,
-              ),
-            ),
-          ),
-          Spacer(
-            flex: 52,
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              GestureDetector(
-                onTap: () {
-                  showDialog();
-                },
-                child: Text(
-                  "lbl_alert".tr,
-                  style: CustomTextStyles.bodyLargeBlack900,
-                ),
-              ),
-              SizedBox(height: 16.v),
-              GestureDetector(
-                onTap: () {
-                  showToast();
-                },
-                child: Text(
-                  "lbl_toast".tr,
-                  style: CustomTextStyles.bodyLargeBlack900,
-                ),
-              ),
-              SizedBox(height: 15.v),
-              GestureDetector(
-                onTap: () {
-                  showSnackbar();
-                },
-                child: Text(
-                  "lbl_snackbar".tr,
-                  style: CustomTextStyles.bodyLargeBlack900,
-                ),
-              )
-            ],
-          )
-        ],
-      ),
     );
   }
 
